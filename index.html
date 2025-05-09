@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjay Thakur | Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .attribute-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .attribute {
+            background-color: #f5f5f5;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+        
+        .attribute:hover {
+            background-color: #eaeaea;
+            color: #333;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Sanjay Thakur</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="home.html" class="active">HOME</a></li>
+                    <li><a href="blog.html">BLOG POSTS</a></li>
+                    <li><a href="about.html">ABOUT ME</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="profile">
+                    <img src="media/photo.jpg" alt="Profile Photo" class="profile-image">
+                    <div class="profile-content">
+                        <!-- <h2>Welcome to my blog</h2> -->
+                        <p>Hi, I'm Sanjay, founder of Widushi — an AI Tutor democratizing education globally. I am doing this on the back on my experience with my previous startup Markovian AI which was acquired in 2023. Between 2023 and now, I led engineering at Curium (Singapore), building real-time, high-throughput IoT systems for asset tracking.</p><br>
+                            
+                        <p>With a CS Master's from Mila/McGill and undergrad from MNIT Jaipur, I'm driven by solving meaningful problems with technology. This mission fuels me daily. Stay tuned — the best is yet to come.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recent-posts">
+            <div class="container">
+                <h2>Recent Posts</h2>
+                <div id="posts-grid" class="posts-grid">
+                    <!-- Recent posts will be loaded here dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="about-contact">
+        <h3>Get In Touch</h3>
+        <p>Feel free to reach out if you have any questions, suggestions, or just want to say hello!</p>
+        <div class="contact-links">
+            <a href="mailto:sttsanjay@gmail.com" class="contact-link">Email</a>
+            <a href="https://x.com/WanabeMarkovian" class="contact-link">Twitter</a>
+            <a href="https://www.linkedin.com/in/sanjaykthakur9/" class="contact-link">LinkedIn</a>
+            <a href="https://github.com/sanjaythakur" class="contact-link">GitHub</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sanjay Thakur. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Import the blog posts data -->
+    <script src="blogData.js"></script>
+    
+    <script>
+        // Function to display recent posts on the home page
+        function displayRecentPosts() {
+            const postsContainer = document.getElementById('posts-grid');
+            const recentPosts = getRecentPosts(3); // Get 2 most recent posts
+            
+            // Generate HTML for each post
+            recentPosts.forEach(post => {
+                const postHTML = `
+                    <article class="post-card">
+                        <h3>${post.title}</h3>
+                        <p class="post-date">${post.date}</p>
+                        <p>${post.excerpt}</p>
+                        <a href="${post.file}" class="read-more">Read More</a>
+                    </article>
+                `;
+                postsContainer.innerHTML += postHTML;
+            });
+        }
+        
+        // Load recent posts when the page is ready
+        document.addEventListener('DOMContentLoaded', displayRecentPosts);
+    </script>
+</body>
+</html>
