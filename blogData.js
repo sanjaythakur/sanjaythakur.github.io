@@ -1,41 +1,12 @@
 // Blog posts data
 const blogPosts = [
   {
-    "title": "Turing Test for AI Tutors",
-    "date": "July 25, 2025",
-    "category": "AI",
-    "excerpt": "As AI tutoring systems become increasingly sophisticated, we need new ways to evaluate their effectiveness. The classic Turing Test asks if a machine can imitate human conversation, but for educational AI, we need different metrics altogether.",
-    "file": "posts/ai-tutor-turing-test.html",
-    "tags": ["AI", "education", "Turing Test", "AI Tutors"]
-  },
-  {
-    "title": "Book Reviews",
-    "date": "July 25, 2025",
-    "category": "AI",
-    "excerpt": "As AI tutoring systems become increasingly sophisticated, we need new ways to evaluate their effectiveness. The classic Turing Test asks if a machine can imitate human conversation, but for educational AI, we need different metrics altogether.",
-    "file": "posts/book-reviews.html",
-  },
-  {
-    "title": "Start being fit when young, thank me later",
-    "date": "July 25, 2025",
-    "category": "AI",
-    "excerpt": "As AI tutoring systems become increasingly sophisticated, we need new ways to evaluate their effectiveness. The classic Turing Test asks if a machine can imitate human conversation, but for educational AI, we need different metrics altogether.",
-    "file": "posts/start-being-fit-when-young-thank-me-later.html",
-  },
-  {
     "title": "Be a Markov State - A Lesson for Life",
-    "date": "July 25, 2025",
+    "date": "May 20, 2025",
     "category": "AI",
-    "excerpt": "As AI tutoring systems become increasingly sophisticated, we need new ways to evaluate their effectiveness. The classic Turing Test asks if a machine can imitate human conversation, but for educational AI, we need different metrics altogether.",
+    "excerpt": "Of course, life isn’t a perfect Markov process. Our “states” are often colored by complex histories. But as a *mental model*, it's empowering. It shifts our focus from helplessness to agency, from nostalgia or guilt to responsibility.",
     "file": "posts/be-a-markov-state.html",
   },
-  {
-    "title": "Movie/Series Review",
-    "date": "July 25, 2025",
-    "category": "AI",
-    "excerpt": "As AI tutoring systems become increasingly sophisticated, we need new ways to evaluate their effectiveness. The classic Turing Test asks if a machine can imitate human conversation, but for educational AI, we need different metrics altogether.",
-    "file": "posts/movie-review.html",
-  }
 ];
 
 // Helper function to parse date strings
