@@ -32,6 +32,175 @@
             color: #333;
             transform: translateY(-2px);
         }
+
+        /* Enhanced Hero Section */
+        .hero {
+            padding: 4rem 0;
+        }
+
+        .profile-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .profile-content p {
+            margin: 1.5rem 0;
+            text-align: justify;
+        }
+
+        /* Enhanced Recent Posts Section */
+        .recent-posts {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 4rem 0;
+            margin-top: 3rem;
+        }
+
+        .recent-posts h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 1rem;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .post-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .post-card .post-date {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .post-card p {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-card .read-more {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .post-card .read-more:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        /* Enhanced Contact Section */
+        .about-contact {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .about-contact h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .about-contact p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Improved link styling */
+        .profile-content a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .profile-content a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .profile-content {
+                font-size: 1rem;
+            }
+
+            .recent-posts h2 {
+                font-size: 2rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-contact {
+                padding: 3rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -54,16 +223,11 @@
                 <div class="profile">
                     <img src="media/photo.jpg" alt="Profile Photo" class="profile-image">
                     <div class="profile-content">
-                        <!-- <h2>Welcome to my blog</h2> -->
                         <p>Hi, I'm Sanjay. A perpetual <a href="./posts/be-a-markov-state.html" target="_blank">Markov state</a>, I take life one state at a time—always moving forward, guided by purpose. My deepest drive lies in building things that expand human understanding, nurture free critical thinking, and unlock our collective potential.</p>
 
-                        <br>
+                        <p>Over the next few years, my mission is clear: to build technologies that address India's most pressing challenges—solutions designed for India, with the power to scale globally. There is no bigger privilege than working on something that you can vastly contribute to and solves a real problem.</p>
 
-                        <p>Over the next few years, my mission is clear: to build technologies that address India's most pressing challenges—solutions designed for India, with the power to scale globally.</p>
-
-                        <br>
-
-                        <p> Why India? Because we’re at a pivotal juncture. On one hand, we are facing deep, complex issues that wear us down, yet on the other hand, we are surrounded by incredible stories of resilience and possibility. This is our moment to rise, with innovation, urgency, and bold ideas. So, stay tuned—there’s a lot coming.</p>
+                        <p>Why India? Because we're at a pivotal juncture. On one hand, we are facing deep, complex issues that wear us down, yet on the other hand, we are surrounded by incredible stories of resilience and possibility. This is our moment to rise, with innovation, urgency, and bold ideas. So, stay tuned—there's a lot coming.</p>
                     </div>
                 </div>
             </div>
@@ -103,7 +267,7 @@
         // Function to display recent posts on the home page
         function displayRecentPosts() {
             const postsContainer = document.getElementById('posts-grid');
-            const recentPosts = getRecentPosts(3); // Get 2 most recent posts
+            const recentPosts = getRecentPosts(3); // Get 3 most recent posts
             
             // Generate HTML for each post
             recentPosts.forEach(post => {

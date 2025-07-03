@@ -8,6 +8,226 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Enhanced About Page Styling */
+        .about-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 4rem 0 3rem 0;
+            text-align: center;
+        }
+
+        .about-header h2 {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .about-header p {
+            font-size: 1.2rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .about-content {
+            padding: 4rem 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-bio {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .about-bio p {
+            margin: 1.5rem 0;
+            text-align: justify;
+            color: #475569;
+        }
+
+        .bio-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3b82f6;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .bio-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bio-list li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .bio-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+
+        .bio-list strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .bio-list em {
+            color: #6366f1;
+            font-style: italic;
+        }
+
+        .bio-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #e2e8f0;
+            font-style: italic;
+            color: #64748b;
+        }
+
+        /* Enhanced Pinned Posts */
+        .pinned-posts {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .pinned-posts h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .pinned-post-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #10b981;
+            transition: all 0.3s ease;
+        }
+
+        .pinned-post-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .pinned-indicator {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pinned-post-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .pinned-post-card .post-date {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .pinned-post-card .post-excerpt {
+            color: #475569;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .pinned-post-card .read-more {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .pinned-post-card .read-more:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        /* Enhanced link styling */
+        .about-bio a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .about-bio a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .about-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-bio {
+                font-size: 1rem;
+            }
+
+            .bio-section {
+                padding: 1.5rem;
+            }
+
+            .pinned-posts {
+                position: static;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -35,17 +255,15 @@
             <div class="container">
                 <div class="about-grid">
                     <div class="about-bio">
-                        <p >Hi again! I'm Sanjay. Previously, I founded Markovian AI which was acquired in 2023. Between 2023 and June 2025, I led engineering at Curium (Singapore), building real-time, high-throughput IoT systems for asset tracking.</p>
-                        <br>
+                        <p>Hi again! I'm Sanjay. Previously, I founded Markovian AI which was acquired in 2023. Between 2023 and June 2025, I led engineering at Curium (Singapore), building real-time, high-throughput IoT systems for asset tracking.</p>
+                        
                         <p>With a CS Master's from Mila/McGill and undergrad from MNIT Jaipur, I'm driven by solving meaningful problems with technology. This mission fuels me daily. Stay tuned — the best is yet to come.</p>
-                        </p>
-                        <br>
                         
                         <div class="bio-section">
                             <h4 class="section-title">Interesting Things I've Done So Far</h4>
                             <ul class="bio-list">
                                 <li>I built and sold <strong>Markovian AI</strong> which was a data-search engine in Toronto. Think of it as a Google-for-enterprises before things like RAG, LLM was a cool thing.</li>
-                                <li>I gained the dark knowledge of controlling ML behavior at the best ML research institute in the world – <strong>Mila</strong> and published at top-tier conferences. See my <a href="#">Google Scholar page</a> here. To date I have acculumated over 700 citations.</li>
+                                <li>I gained the dark knowledge of controlling ML behavior at the best ML research institute in the world – <strong>Mila</strong> and published at top-tier conferences. See my <a href="#">Google Scholar page</a> here. To date I have accumulated over 700 citations.</li>
                                 <li>At the age of 19 years, I built and patented an app that was purchased by the <strong>Indian Railways</strong>. I owe it to Zine which facilitated this opportunity when I was pursuing my Bachelor's degree.</li>
                                 <li>During my third year of undergraduate, I built a <strong>Smartmeter</strong> for home automation, power saving and power grid balance. It was patented and awarded the runner-up prize at GridTech'15 International Conference & Exhibition.</li>
                                 <li>I have been part of the only team that has won the most popular sports tournament of my university called <strong>Hong Kong Sixes</strong> twice in the 80+ years of university history.</li>
@@ -77,17 +295,14 @@
                             <!-- Manually add pinned posts here -->
                             <div class="pinned-post-card">
                                 <div class="pinned-indicator">Pinned</div>
-                                <h4>Blog Post Title</h4>
-                                <p class="post-date">January 1, 2023</p>
-                                <p class="post-excerpt">Brief excerpt from the blog post...</p>
-                                <a href="blog-post.html" class="read-more">Read More</a>
+                                <h4>Be a Markov State - A Lesson for Life</h4>
+                                <p class="post-date">May 7, 2025</p>
+                                <p class="post-excerpt">A reflection on how the Markov property can guide us in living a purposeful life, focusing on the present rather than being trapped by the past.</p>
+                                <a href="posts/be-a-markov-state.html" class="read-more">Read More</a>
                             </div>
-                           
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </section>
     </main>

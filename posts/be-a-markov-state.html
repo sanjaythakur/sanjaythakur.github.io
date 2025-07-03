@@ -8,6 +8,118 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Enhanced Content Formatting */
+        .post-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .post-content h2 {
+            margin: 3rem 0 1.5rem 0;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content h3 {
+            margin: 2rem 0 1rem 0;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #334155;
+        }
+
+        .post-content p {
+            margin: 1.5rem 0;
+            text-align: justify;
+        }
+
+        .section-spacer {
+            margin: 3rem 0;
+        }
+
+        /* Sanskrit verse styling */
+        .sanskrit-verse {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-left: 5px solid #ea580c;
+            margin: 3rem 0;
+            padding: 2rem;
+            border-radius: 0 15px 15px 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(234, 88, 12, 0.1);
+        }
+
+        .sanskrit-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #9a3412;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .sanskrit-translation {
+            font-size: 1rem;
+            color: #7c2d12;
+            font-style: italic;
+        }
+
+        /* Markov State definition styling */
+        .markov-definition {
+            background: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 100%);
+            border-left: 5px solid #3b82f6;
+            margin: 3rem 0;
+            padding: 2rem;
+            border-radius: 0 15px 15px 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1e40af;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Emphasis styling */
+        .post-content b, .post-content strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        /* Improved link styling */
+        .post-content a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .post-content a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .post-content {
+                font-size: 1rem;
+            }
+
+            .post-content h2 {
+                font-size: 1.7rem;
+            }
+
+            .post-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .sanskrit-verse, .markov-definition {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+
+            .sanskrit-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -30,51 +142,57 @@
                 <p class="post-date">May 7, 2025</p>
                 
                 <div class="post-content">
-                    
                     <p>
-                    Nearly a decade ago, I found myself immersed in David Silver’s deep reinforcement learning lectures on <a href="https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ" target="_blank">YouTube</a> (hard to believe how quickly time passes). Among the many technical concepts, one phrase stood out and quietly etched itself into my memory: <b>Markov State</b>.
-                    
-                    Its simple yet profound definition struck a chord - <b>the future depends only on the present state and not on the past</b>. That moment felt magical. My eyes lit up. Something about it resonated deeply with my lived experience.
-                </p>    
-                    <br>
-                    <p>
-                    As I reflected, my mind wandered through old memories - both triumphs and failures. A common thread ran through them: I was often either stuck in regret or resting in complacency, fixated too much on the past. That fixation had, at times, paralyzed me. The Markov property offered a liberating counterpoint: the present moment alone shapes the probabilities of the future.
+                        Nearly a decade ago, I found myself immersed in David Silver's deep reinforcement learning lectures on <a href="https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ" target="_blank">YouTube</a> (hard to believe how quickly time passes). Among the many technical concepts, one phrase stood out and quietly etched itself into my memory: <strong>Markov State</strong>.
                     </p>
                     
-                    <br>
-                    <p>
-                    This insight reminded me of another moment that left a lasting impression - watching a film in which a line from the <b>Bhagavad Gita</b> was quoted:
-
-                    <br>
-                    <br>
-                    <p>यं हि न व्यथयन्त्येते पुरुषं पुरुषर्षभ |
-                    समदुःखसुखं धीरं सोऽमृतत्वाय कल्पते || 2.15 ||</p>
+                    <div class="markov-definition">
+                        Its simple yet profound definition struck a chord: <strong>the future depends only on the present state and not on the past</strong>. That moment felt magical. My eyes lit up. Something about it resonated deeply with my lived experience.
+                    </div>
                     
-                    <br>
+                    <p>
+                        As I reflected, my mind wandered through old memories - both triumphs and failures. A common thread ran through them: I was often either stuck in regret or resting in complacency, fixated too much on the past. That fixation had, at times, paralyzed me. The Markov property offered a liberating counterpoint: the present moment alone shapes the probabilities of the future.
+                    </p>
+                    
+                    <p>
+                        This insight reminded me of another moment that left a lasting impression - watching a film in which a line from the <strong>Bhagavad Gita</strong> was quoted:
+                    </p>
+
+                    <div class="sanskrit-verse">
+                        <div class="sanskrit-text">
+                            यं हि न व्यथयन्त्येते पुरुषं पुरुषर्षभ |<br>
+                            समदुःखसुखं धीरं सोऽमृतत्वाय कल्पते || 2.15 ||
+                        </div>
+                        <div class="sanskrit-translation">
+                            "O Arjun, noblest among men, that person who is not disturbed by happiness and distress and remains steady in both becomes eligible for liberation."
+                        </div>
+                    </div>
+                    
                     <p> 
-                    "O Arjun, noblest among men, that person who is not disturbed by happiness and distress and remains steady in both becomes eligible for liberation."
-                    
-                    Though spoken in a vastly different context, the verse touched me in a similar way. It spoke of equanimity - of staying centered regardless of life's emotional swings. To me, this echoed the essence of the Markov State: anchoring yourself in the present, unmoved by the turbulence of the past.
-                </p>
-
-                    <br>
-                    <p>
-                    And so, here I am today, striving - in the deepest sense - to <b>be</b> a Markov State. To focus on doing the next right thing for my family, my country, and the world. To contribute, in whatever small way I can, toward leaving the world better than I found it.
+                        Though spoken in a vastly different context, the verse touched me in a similar way. It spoke of equanimity - of staying centered regardless of life's emotional swings. To me, this echoed the essence of the Markov State: anchoring yourself in the present, unmoved by the turbulence of the past.
                     </p>
 
-                    <br>
                     <p>
-                    "The future is conditionally independent of the past given the present." That’s the technical articulation of the Markov property. But looked at through a human lens, it becomes something powerful. It reminds us that no matter the baggage we carry - regrets, achievements, mistakes - it is our present choices that shape the possibilities ahead.
-                    
-                    Of course, life isn’t a perfect Markov process. Our "states" are often colored by complex histories. But as a <b>mental model</b>, it's empowering. It shifts our focus from helplessness to agency, from nostalgia or guilt to responsibility.
-                    
-                    It reminds us: we are not prisoners of our past, but stewards of our future - through the actions we choose in this very moment.
+                        And so, here I am today, striving - in the deepest sense - to <strong>be</strong> a Markov State. To focus on doing the next right thing for my family, my country, and the world. To contribute, in whatever small way I can, toward leaving the world better than I found it.
                     </p>
-                                <br>           
+
+                    <div class="markov-definition">
+                        "The future is conditionally independent of the past given the present." That's the technical articulation of the Markov property. But looked at through a human lens, it becomes something powerful.
+                    </div>
+                    
+                    <p>
+                        It reminds us that no matter the baggage we carry - regrets, achievements, mistakes - it is our present choices that shape the possibilities ahead.
+                        
+                        Of course, life isn't a perfect Markov process. Our "states" are often colored by complex histories. But as a <strong>mental model</strong>, it's empowering. It shifts our focus from helplessness to agency, from nostalgia or guilt to responsibility.
+                        
+                        It reminds us: we are not prisoners of our past, but stewards of our future - through the actions we choose in this very moment.
+                    </p>
+                    
+                    <div class="section-spacer"></div>
                 </div>
                 
                 <div class="post-navigation">
-                    <a href="../index.html" class="back-link">← Back to Home</a>
+                    <a href="../blog.html" class="back-link">← Back to Blog</a>
                 </div>
             </div>
         </article>

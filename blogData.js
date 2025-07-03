@@ -1,6 +1,13 @@
 // Blog posts data
 const blogPosts = [
   {
+    "title": "Founder's Motivation Notes for Widushi",
+    "date": "July 3, 2025",
+    "category": "Education & Technology",
+    "excerpt": "India stands at a defining moment with 800+ million Indians under 35. The real return on education lies not in degrees or GPAs, but in unlocking human potential. It's time to reimagine education for the AI era.",
+    "file": "posts/launching-widushi.html"
+  },
+  {
     "title": "Peace Through Power: India's Defence Tech Moment",
     "date": "June 25, 2025",
     "category": "Defence & Technology",
