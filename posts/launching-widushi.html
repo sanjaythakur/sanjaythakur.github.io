@@ -251,6 +251,28 @@
             .sidebar {
                 margin-top: 2rem;
             }
+
+            .widushi-cta {
+                padding: 2rem 1.5rem;
+                margin: 1.5rem 0 2rem 0;
+            }
+
+            .widushi-cta h3 {
+                font-size: 1.5rem;
+            }
+
+            .widushi-cta p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+            }
         }
 
         /* Sidebar Styling */
@@ -333,6 +355,68 @@
             line-height: 1.4;
             margin-top: 0.8rem;
         }
+
+        /* Widushi CTA Styling */
+        .widushi-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            margin: 2rem 0 3rem 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+
+        .widushi-cta h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .widushi-cta p {
+            margin: 0 0 2rem 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-icon {
+            font-size: 1.2rem;
+        }
+
+        .cta-text {
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -356,6 +440,21 @@
                     <div class="article-content">
                         <h1>Founder's Motivation Notes for Widushi</h1>
                         <p class="post-date">July 3, 2025</p>
+                        
+                        <div class="widushi-cta">
+                            <h3>Try Widushi Now</h3>
+                            <p>Experience our AI-powered learning platform for UPSC preparation</p>
+                            <div class="cta-buttons">
+                                <a href="https://widushi.org" target="_blank" class="cta-button web">
+                                    <span class="cta-icon">🌐</span>
+                                    <span class="cta-text">Web App</span>
+                                </a>
+                                <a href="https://play.google.com/store/apps/details?id=com.widushi.lms" target="_blank" class="cta-button android">
+                                    <span class="cta-icon">📱</span>
+                                    <span class="cta-text">Android App</span>
+                                </a>
+                            </div>
+                        </div>
                         
                         <div class="post-content">
                     <p>
