@@ -243,6 +243,95 @@
                 font-size: 1.1rem;
                 padding: 1.5rem;
             }
+
+            .main-content-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                margin-top: 2rem;
+            }
+        }
+
+        /* Sidebar Styling */
+        .main-content-wrapper {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .article-content {
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar-post {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .sidebar-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .sidebar-post h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .sidebar-post h4 a {
+            color: #1e293b;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-post h4 a:hover {
+            color: #0ea5e9;
+        }
+
+        .sidebar-post-date {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-post-category {
+            font-size: 0.8rem;
+            color: #0ea5e9;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-post-excerpt {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.4;
+            margin-top: 0.8rem;
         }
     </style>
 </head>
@@ -263,10 +352,12 @@
     <main>
         <article class="blog-post">
             <div class="container">
-                <h1>Founder's Motivation Notes for Widushi</h1>
-                <p class="post-date">July 3, 2025</p>
-                
-                <div class="post-content">
+                <div class="main-content-wrapper">
+                    <div class="article-content">
+                        <h1>Founder's Motivation Notes for Widushi</h1>
+                        <p class="post-date">July 3, 2025</p>
+                        
+                        <div class="post-content">
                     <p>
                         It's no surprise that modern education has not stood the test of time. Surveys reveal that:
                     </p>
@@ -300,7 +391,7 @@
                     
                     <h3>1) The Memorization Trap</h3>
                     <p>
-                        The modern education system is more about memorization, compliance and rote learning. And in the day and age of AI, it's quickly losing relevance. Students are trained to reproduce information rather than think critically, inquire, experiment, collaborate, solve problems, or adapt to new situations—which is exactly the opposite of what tomorrow's economy demands.
+                        The modern education system is more about memorization, compliance and rote learning. And in the day and age of AI, it's quickly losing relevance. Students are trained to reproduce information rather than think critically, inquire, experiment, collaborate, solve problems, or adapt to new situations which is exactly the opposite of what tomorrow's economy demands.
                     </p>
                     
                     <h3>2) The Degree Devaluation Crisis</h3>
@@ -402,10 +493,30 @@
                     </p>
                     
                     <div class="section-spacer"></div>
-                </div>
-                
-                <div class="post-navigation">
-                    <a href="../blog.html" class="back-link">← Back to Blog</a>
+                        </div>
+                        
+                        <div class="post-navigation">
+                            <a href="../blog.html" class="back-link">← Back to Blog</a>
+                        </div>
+                    </div>
+                    
+                    <aside class="sidebar">
+                        <h3>Latest Posts</h3>
+                        
+                        <div class="sidebar-post">
+                            <div class="sidebar-post-category">Defence & Technology</div>
+                            <h4><a href="peace-through-strength.html">Peace Through Power: India's Defence Tech Moment</a></h4>
+                            <div class="sidebar-post-date">June 25, 2025</div>
+                            <div class="sidebar-post-excerpt">India must urgently invest in next-generation defence technologies. Our priorities can be thought of as a kind of civilizational Maslow's hierarchy.</div>
+                        </div>
+                        
+                        <div class="sidebar-post">
+                            <div class="sidebar-post-category">AI</div>
+                            <h4><a href="be-a-markov-state.html">Be a Markov State - A Lesson for Life</a></h4>
+                            <div class="sidebar-post-date">May 20, 2025</div>
+                            <div class="sidebar-post-excerpt">Life isn't a perfect Markov process, but as a mental model, it's empowering. It shifts our focus from helplessness to agency.</div>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </article>

@@ -112,6 +112,95 @@
             .image-container {
                 padding: 1rem;
             }
+
+            .main-content-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                margin-top: 2rem;
+            }
+        }
+
+        /* Sidebar Styling */
+        .main-content-wrapper {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .article-content {
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar-post {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .sidebar-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .sidebar-post h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .sidebar-post h4 a {
+            color: #1e293b;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-post h4 a:hover {
+            color: #dc2626;
+        }
+
+        .sidebar-post-date {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-post-category {
+            font-size: 0.8rem;
+            color: #dc2626;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-post-excerpt {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.4;
+            margin-top: 0.8rem;
         }
     </style>
 </head>
@@ -132,10 +221,12 @@
     <main>
         <article class="blog-post">
             <div class="container">
-                <h1>Peace Through Power: India's Defence Tech Moment</h1>
-                <p class="post-date">June 25, 2025</p>
-                
-                <div class="post-content">
+                <div class="main-content-wrapper">
+                    <div class="article-content">
+                        <h1>Peace Through Power: India's Defence Tech Moment</h1>
+                        <p class="post-date">June 25, 2025</p>
+                        
+                        <div class="post-content">
                     <p>
                         The recent Pahalgam incident, followed by renewed tensions at our borders, has once again made something abundantly clear: India must urgently invest in next-generation defence technologies. While we rightfully salute the bravery, professionalism, and decisiveness of our armed forces and leadership, we must also confront a sobering reality that our adversaries are preparing faster, building smarter, and thinking longer-term.
                     </p>
@@ -176,10 +267,30 @@
                     </p>
                     
                     <div class="section-spacer"></div>
-                </div>
-                
-                <div class="post-navigation">
-                    <a href="../blog.html" class="back-link">← Back to Blog</a>
+                        </div>
+                        
+                        <div class="post-navigation">
+                            <a href="../blog.html" class="back-link">← Back to Blog</a>
+                        </div>
+                    </div>
+                    
+                    <aside class="sidebar">
+                        <h3>Latest Posts</h3>
+                        
+                        <div class="sidebar-post">
+                            <div class="sidebar-post-category">Education & Technology</div>
+                            <h4><a href="launching-widushi.html">Founder's Motivation Notes for Widushi</a></h4>
+                            <div class="sidebar-post-date">July 3, 2025</div>
+                            <div class="sidebar-post-excerpt">India stands at a defining moment with 800+ million Indians under 35. The real return on education lies not in degrees or GPAs, but in unlocking human potential.</div>
+                        </div>
+                        
+                        <div class="sidebar-post">
+                            <div class="sidebar-post-category">AI</div>
+                            <h4><a href="be-a-markov-state.html">Be a Markov State - A Lesson for Life</a></h4>
+                            <div class="sidebar-post-date">May 20, 2025</div>
+                            <div class="sidebar-post-excerpt">Life isn't a perfect Markov process, but as a mental model, it's empowering. It shifts our focus from helplessness to agency.</div>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </article>
