@@ -1,6 +1,13 @@
 // Blog posts data
 const blogPosts = [
   {
+    "title": "The World's Most Advanced AI for Handwritten Answer Evaluation",
+    "date": "July 26, 2025",
+    "category": "AI & Technology",
+    "excerpt": "Imagine an AI that reads any handwriting and understands complex diagrams, tables, and flowcharts, then provides expert-level evaluations instantly. At Widushi, we've turned this vision into reality with breakthrough technology that transforms assessment worldwide.",
+    "file": "posts/the-worlds-most-advanced-ai-for-handwritten-evaluation.html"
+  },
+  {
     "title": "Founder's Motivation Notes for Widushi",
     "date": "July 3, 2025",
     "category": "Education & Technology",

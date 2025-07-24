@@ -1,0 +1,58 @@
+Battle Scars and Mental Models for Reliable LLMs
+
+Bracing for the real world truth
+- LLMs are not a silver bullet.
+- Building AI startups even with LLMs is actually harder than an equivalent SaaS without AI. Reason being it is a tech problem. It worth its salt though because the opportunity is huge with the potential to recompose how we do anything and everything.
+
+My modern AI developer Comrades, I am pretty sure you all have found it impossible to go from prototype/demo to production when an LLM is involved. In fact I have seen my comrades in their eye and pierce through  to notice them scratching their head and pulling their hair out.
+- LLMs are not a silver bullet.
+- Building AI startups even with LLMs is actually harder than an equivalent SaaS without AI. Reason being it is a tech problem. It worth its salt though because the opportunity is huge with the potential to recompose how we do anything and everything.
+
+Clear and specific instructions: Provide explicit instructions, avoiding ambiguity that can lead to hallucinations or off-topic responses. 
+Context is crucial: Offer relevant background information to help the LLM understand the task and generate more accurate outputs. 
+Few-shot learning: Include examples of desired input-output pairs to guide the LLM. 
+Specify output details: Define the desired output format (e.g., length, tone, structure). 
+Break down complex tasks: Decompose large tasks into smaller, manageable steps to improve clarity and reduce errors. 
+Use structured prompts: Employ labeled sections or separators in your prompts to organize information effectively
+Guardrails and scaffolding helps.
+Personalization comes later. Scafolding and guardrails are your best friends.
+
+Prompt chaining types
+- Sequential
+- Parallel
+- Hybrid
+
+
+What works?
+1) High agency
+2) Domain expertise
+
+What doesn't works?
+0) There are no shortcuts. The more of an expert you are, the more you can do with LLMs.
+1) One size fits all LLMs
+2) LLMs have fundamental limitations, tasks that they really can't do at all. Such limits are more apparent on multi-modal tasks. This is true even with task breakdowns.
+3) Agents never worked for me. Workflows are your best friends.
+
+Workflow types
+- Chain of thought
+
+Architecture
+- Data pipelines are your best friends.
+
+
+Recommendations
+1) Build your own router. I haven't found a single one that is neither simple nor fits all the checkboxes.
+2) Neo4J is not worth it. Free tier is too limited. Paid tier is too expensive. Learning curve doesn't even apply to other tools. 
+3) Postgresql.
+4) I will put my bet on Apache Airflow when it comes to complex workflows. Haven't tried newer tools though. There might be something interesting in there.
+5) Use LLM batching to reduce cost.
+6) Only use LLMs if there is no other way. 
+7) More the number of input tokens, lower is the quality of the output.
+8) The more of an expert you are, the more you can do with LLMs. For example, for Widushi we have go through the state of the art pedagogical research for the tasks we are interested in.
+9) As LLMs are getting better, the impact of prompts matter more than examples.
+
+Once the LLM proposes a prompt, I run it on a few typical examples. If the results are off, I don’t just tweak the prompt manually. Instead, I ask the LLM to do so, asking specifically for a generic correction,
+
+
+
+Multi-step tasks
