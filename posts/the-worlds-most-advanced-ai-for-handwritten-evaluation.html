@@ -309,6 +309,23 @@
             .cta-button {
                 padding: 0.8rem 1.5rem;
             }
+
+            .demo-videos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .demo-video-item {
+                padding: 1rem;
+            }
+
+            .demo-video-small {
+                max-width: 100%;
+            }
+
+            .demo-videos-section h3 {
+                font-size: 1.5rem;
+            }
         }
 
         /* Sidebar Styling */
@@ -514,6 +531,73 @@
             font-style: italic;
             color: #64748b;
             font-size: 0.95rem;
+        }
+
+        /* Demo Videos Section Styling */
+        .demo-videos-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-videos-section h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .demo-videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .demo-video-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .demo-video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .demo-video-small {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .demo-video-small:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .demo-video-item .video-caption {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #475569;
+            font-style: normal;
+            margin-top: 1rem;
+        }
+
+        .demo-video-item .video-caption strong {
+            color: #1e293b;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -753,6 +837,61 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="demo-videos-section">
+                                <h3>See Widushi AI in Action</h3>
+                                <div class="demo-videos-grid">
+                                    <div class="demo-video-item">
+                                        <video class="demo-video-small" autoplay loop muted playsinline>
+                                            <source src="../media/actionable_feedback.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div class="video-caption">
+                                            <strong>Actionable Feedback:</strong> AI provides specific, constructive feedback that helps students improve their answers
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="demo-video-item">
+                                        <video class="demo-video-small" autoplay loop muted playsinline>
+                                            <source src="../media/cohesive_across_pages.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div class="video-caption">
+                                            <strong>Cohesive Analysis:</strong> Maintains context and narrative flow across multiple pages of handwritten content
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="demo-video-item">
+                                        <video class="demo-video-small" autoplay loop muted playsinline>
+                                            <source src="../media/ignores_non_relevant_background_printed_text.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div class="video-caption">
+                                            <strong>Smart Filtering:</strong> Automatically ignores irrelevant background text and focuses on the actual handwritten content
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="demo-video-item">
+                                        <video class="demo-video-small" autoplay loop muted playsinline>
+                                            <source src="../media/multiple_languages.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div class="video-caption">
+                                            <strong>Multilingual Support:</strong> Seamlessly processes mixed-language content with natural code-switching
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="demo-video-item">
+                                        <video class="demo-video-small" autoplay loop muted playsinline>
+                                            <source src="../media/understands_handdrawn_diagrams.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div class="video-caption">
+                                            <strong>Diagram Understanding:</strong> Comprehends and evaluates hand-drawn diagrams, flowcharts, and visual elements
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             
                             <!-- <div class="section-spacer"></div>
                             
@@ -956,6 +1095,18 @@
                 fullscreenOverlay.classList.remove('active');
                 fullscreenVideo.pause();
             }
+        });
+
+        // Add click functionality to all demo videos
+        const demoVideos = document.querySelectorAll('.demo-video-small');
+        demoVideos.forEach(video => {
+            video.addEventListener('click', function() {
+                const videoSrc = this.querySelector('source').src;
+                fullscreenVideo.querySelector('source').src = videoSrc;
+                fullscreenVideo.load();
+                fullscreenOverlay.classList.add('active');
+                fullscreenVideo.play();
+            });
         });
     </script>
 </body>
