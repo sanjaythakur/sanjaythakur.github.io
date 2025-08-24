@@ -1,6 +1,13 @@
 // Blog posts data
 const blogPosts = [
   {
+    "title": "Battle-Tested Mental Models for Reliable LLMs",
+    "date": "August 25, 2025",
+    "category": "AI & Engineering",
+    "excerpt": "Lessons learned the hard way: going from prototype to production with LLMs is harder than you think. Here are the mental models and engineering practices that actually work when building reliable AI systems.",
+    "file": "posts/battle-tested-mental-models-for-relliable-llms.html"
+  },
+  {
     "title": "The World's Most Advanced AI for Handwritten Answer Evaluation",
     "date": "July 26, 2025",
     "category": "AI & Technology",

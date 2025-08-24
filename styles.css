@@ -7,6 +7,9 @@
     --light-text: #6c757d;
     --border-color: #dee2e6;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --table-header-bg: #f8f9fa;
+    --table-border: #e9ecef;
+    --table-hover: #f1f3f4;
 }
 
 * {
@@ -502,4 +505,66 @@ footer p {
 .bio-highlight p {
     margin-bottom: 0.5rem;
     line-height: 1.7;
-} 
+}
+
+/* Table Styles */
+.trade-offs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background-color: white;
+    font-size: 0.95rem;
+}
+
+.trade-offs-table thead {
+    background-color: var(--table-header-bg);
+    border-bottom: 2px solid var(--table-border);
+}
+
+.trade-offs-table th {
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+}
+
+.trade-offs-table td {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--table-border);
+    line-height: 1.6;
+    vertical-align: top;
+}
+
+.trade-offs-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.trade-offs-table tbody tr:hover {
+    background-color: var(--table-hover);
+    transition: background-color 0.2s ease;
+}
+
+.trade-offs-table tbody tr:nth-child(even) {
+    background-color: #fafbfc;
+}
+
+.trade-offs-table tbody tr:nth-child(even):hover {
+    background-color: var(--table-hover);
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    .trade-offs-table {
+        font-size: 0.9rem;
+    }
+    
+    .trade-offs-table th,
+    .trade-offs-table td {
+        padding: 1rem;
+    }
+}

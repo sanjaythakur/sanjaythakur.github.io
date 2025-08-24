@@ -1,58 +1,677 @@
-Battle Scars and Mental Models for Reliable LLMs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjay Thakur | Battle-Tested Mental Models for Reliable LLMs</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Enhanced Content Formatting */
+        .post-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
 
-Bracing for the real world truth
-- LLMs are not a silver bullet.
-- Building AI startups even with LLMs is actually harder than an equivalent SaaS without AI. Reason being it is a tech problem. It worth its salt though because the opportunity is huge with the potential to recompose how we do anything and everything.
+        .post-content h2 {
+            margin: 3rem 0 1.5rem 0;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
 
-My modern AI developer Comrades, I am pretty sure you all have found it impossible to go from prototype/demo to production when an LLM is involved. In fact I have seen my comrades in their eye and pierce through  to notice them scratching their head and pulling their hair out.
-- LLMs are not a silver bullet.
-- Building AI startups even with LLMs is actually harder than an equivalent SaaS without AI. Reason being it is a tech problem. It worth its salt though because the opportunity is huge with the potential to recompose how we do anything and everything.
+        .post-content h3 {
+            margin: 2rem 0 1rem 0;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #334155;
+        }
 
-Clear and specific instructions: Provide explicit instructions, avoiding ambiguity that can lead to hallucinations or off-topic responses. 
-Context is crucial: Offer relevant background information to help the LLM understand the task and generate more accurate outputs. 
-Few-shot learning: Include examples of desired input-output pairs to guide the LLM. 
-Specify output details: Define the desired output format (e.g., length, tone, structure). 
-Break down complex tasks: Decompose large tasks into smaller, manageable steps to improve clarity and reduce errors. 
-Use structured prompts: Employ labeled sections or separators in your prompts to organize information effectively
-Guardrails and scaffolding helps.
-Personalization comes later. Scafolding and guardrails are your best friends.
+        .post-content p {
+            margin: 1.5rem 0;
+            text-align: justify;
+        }
 
-Prompt chaining types
-- Sequential
-- Parallel
-- Hybrid
+        .post-content ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            margin: 0.8rem 0;
+            line-height: 1.6;
+        }
+
+        .post-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .section-spacer {
+            margin: 3rem 0;
+        }
+
+        /* Image containers */
+        .image-container {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: #f8fafc;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            margin: 1rem 0;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-caption {
+            margin-top: 1rem;
+            font-style: italic;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Blockquote styling */
+        .truth-quote {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 5px solid #f59e0b;
+            margin: 3rem 0;
+            padding: 2rem;
+            border-radius: 0 15px 15px 0;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #92400e;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.1);
+        }
+
+        .progress-stages {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 5px 15px rgba(14, 165, 233, 0.1);
+        }
+
+        .progress-stage {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #0ea5e9;
+        }
+
+        .stage-title {
+            font-weight: 600;
+            color: #0c4a6e;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-description {
+            color: #334155;
+        }
+
+        /* Sidebar Styling */
+        .main-content-wrapper {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .article-content {
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar-post {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .sidebar-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .sidebar-post h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .sidebar-post h4 a {
+            color: #1e293b;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-post h4 a:hover {
+            color: #0ea5e9;
+        }
+
+        .sidebar-post-date {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-post-category {
+            font-size: 0.8rem;
+            color: #0ea5e9;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-post-excerpt {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.4;
+            margin-top: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                margin-top: 2rem;
+                width: 100%;
+            }
+
+            .post-content {
+                font-size: 1rem;
+            }
+
+            .post-content h2 {
+                font-size: 1.7rem;
+            }
+
+            .post-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Sanjay Thakur</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">HOME</a></li>
+                    <li><a href="../blog.html" class="active">BLOG POSTS</a></li>
+                    <li><a href="../about.html">ABOUT ME</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <div class="container">
+                <div class="main-content-wrapper">
+                    <div class="article-content">
+                        <h1>Battle-Tested Mental Models for Reliable LLMs</h1>
+                        <p class="post-date">August 25, 2025</p>
+                        
+                        <div class="post-content">
+                            <p>
+                                My modern AI developer comrades, I am pretty sure you all have found it impossible to go from prototype/demo to production when an LLM is involved. Bracing for the real world truth:
+                            </p>
+                            
+                            <div class="truth-quote">
+                                "LLMs are not a silver bullet. Building AI startups even with LLMs is actually harder than an equivalent SaaS without AI. Reason being it is a tech problem unlike Ubers, Zomato which were mainly a marketing problem."
+                            </div>
+                            
+                            <p>
+                                <strong>Building AI startups</strong> even with LLMs is actually harder than an equivalent SaaS without AI. Reason being it is a tech problem. It's worth its salt though because the opportunity is huge with the potential to recompose how we do anything and everything.
+                            </p>
+                            
+                            <p>
+                                Two main challenges are
+                            </p>
+                            <ol>
+                                <li>Output that exceeds human counterparts</li>
+                                <li>Consistency</li>
+                            </ol>
+                            
+                            <p>
+                                <strong>There are no shortcuts</strong> - Domain expertise and high agency are your best friends.
+                            </p>
+
+                            <div class="section-spacer"></div>
+
+                            <h2>The Reality Check: Automatic Email Responder Agent</h2>
+                            
+                            <div class="image-grid">
+                                <div class="image-container">
+                                    <img src="../media/task.png" alt="Task Example" class="post-image">
+                                    <div class="image-caption">The Task</div>
+                                </div>
+                                <div class="image-container">
+                                    <img src="../media/cheap_demo.png" alt="Cheap Demo" class="post-image">
+                                    <div class="image-caption">The Cheap Demo</div>
+                                </div>
+                                <div class="image-container">
+                                    <img src="../media/pure_bliss.png" alt="Pure Bliss" class="post-image">
+                                    <div class="image-caption">Pure Bliss</div>
+                                </div>
+                            </div>
+
+                            <div class="section-spacer"></div>
+
+                            <h2>The Journey: From Prototype to Production</h2>
+                            
+                            <div class="progress-stages">
+                                <div class="progress-stage">
+                                    <div class="stage-title">Going from 0 to 70% - Easy - No worries</div>
+                                    <div class="stage-description">The initial prototype phase where everything seems magical and possibilities are endless.</div>
+                                </div>
+                                <div class="progress-stage">
+                                    <div class="stage-title">Going from 70% to 95% - The Real Work</div>
+                                    <div class="stage-description">Context Engineering, Domain Expertise</div>
+                                </div>
+                                <div class="progress-stage">
+                                    <div class="stage-title">Going from 95% to 100% - The Final Mile</div>
+                                    <div class="stage-description">Sound engineering practices, Fallbacks</div>
+                                </div>
+                            </div>
+
+                            <div class="section-spacer"></div>
+
+                            <h2>Overview: What We'll Cover</h2>
+                            
+                            <p>
+                                In this comprehensive guide, I'll walk you through the essential mental models and engineering practices that make LLM systems reliable in production. We'll cover three main areas:
+                            </p>
+                            
+                            <ol>
+                                <li><strong>Sound Engineering Practices</strong> - Core principles and fallback strategies that form the foundation of reliable systems</li>
+                                <li><strong>Context Engineering</strong> - The art of crafting effective prompts and managing context for optimal performance</li>
+                                <li><strong>Tips and Tricks</strong> - Battle-tested insights and practical strategies from real-world implementations</li>
+                            </ol>
+                            
+                            <p>
+                                Each section builds upon the previous one, creating a robust framework for building LLM systems that you can trust in production environments.
+                            </p>
+
+                            <div class="section-spacer"></div>
+
+                            <h2>Context Engineering: The Key to Reliability</h2>
+                            
+                            <div class="image-container">
+                                <img src="../media/context_engineering.png" alt="Context Engineering" class="post-image">
+                                <div class="image-caption">Context Engineering Framework</div>
+                            </div>
+
+                            <div class="image-container">
+                                <img src="../media/another_way_to_see_context_engineering.png" alt="Another way to see Context Engineering" class="post-image">
+                                <div class="image-caption">Another perspective on Context Engineering</div>
+                            </div>
+
+                            <div class="section-spacer"></div>
+
+                            <h2>The Planner Pattern: Chaining Mental Models</h2>
+                            
+                            <p>
+                                One of the most effective patterns for building reliable LLM systems is the planner approach, which involves chaining multiple specialized models or prompts together.
+                            </p>
+
+                            <div class="image-container">
+                                <img src="../media/chaining_mental_model.png" alt="Chaining Mental Models" class="post-image">
+                                <div class="image-caption">Chaining Mental Models for Complex Tasks</div>
+                            </div>
+
+                            <h3>Key Planning Techniques</h3>
+                            
+                            <p>
+                                Here are some of the most effective planning techniques used in production LLM systems:
+                            </p>
+
+                            <div class="image-grid">
+                                <div class="image-container">
+                                    <img src="../media/planner.png" alt="Planner" class="post-image">
+                                    <div class="image-caption">Basic Planner Architecture</div>
+                                </div>
+                                <div class="image-container">
+                                    <img src="../media/more_planner.png" alt="More planner" class="post-image">
+                                    <div class="image-caption">Advanced Planner Patterns</div>
+                                </div>
+                            </div>
+
+                            
+
+                            <h3>Trade-offs of the Planner Pattern</h3>
+                            
+                            <table class="trade-offs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Downsides</th>
+                                        <th>Upsides</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Latency overhead</td>
+                                        <td>Higher quality output</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Code and maintenance complexity</td>
+                                        <td>Isolation of critical sub-tasks like verification and compliance</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cascading failures</td>
+                                        <td>Better error handling and recovery</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Interface management between components</td>
+                                        <td>Easier debugging and optimization</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="section-spacer"></div>
+
+                            <h2>Memory Management</h2>
+                            
+                            <p>
+                                Effective memory management is crucial for building reliable LLM systems:
+                            </p>
+
+                            <ol>
+                                <li><strong>Short-term memory</strong> - Context within the current session</li>
+                                <li><strong>Long-term memory</strong> - Persistent knowledge and learned patterns</li>
+                            </ol>
+
+                            <p>
+                                Representative memory formats include natural language, embeddings, databases, and structured lists, among others. Choose the right format based on your specific use case and retrieval requirements.
+                            </p>
+
+                            <div class="image-container">
+                                <img src="../media/memories.png" alt="Memories" class="post-image">
+                                <div class="image-caption">Memories</div>
+                            </div>
+                            
+                            <div class="truth-quote">
+                                <strong>Database Choice Insight:</strong> PostgreSQL has been the best database I've found for memory management, even for embeddings and graph data. Other specialized tools like ChromaDB and Neo4j don't even come close in terms of reliability, performance, and flexibility.
+                            </div>
+
+                            <div class="section-spacer"></div>
+
+                            <h2>Agent Types: Write, Select, Compress, Isolate</h2>
+                            
+                            <p>
+                                Reliable agents are built by composing four fundamental capabilities:
+                                <strong>write</strong>, <strong>select</strong>, <strong>compress</strong>, and <strong>isolate</strong>.
+                            </p>
+                            
+                            <ol>
+                                <li><strong>Write</strong> : Generate content, code, or actions from instructions and context. Guard with validators, tests, and human review for high-impact tasks.</li>
+                                <li><strong>Select</strong> : Choose among tools, documents, or policies. Use structured outputs, confidence thresholds, and fallback rules.</li>
+                                <li><strong>Compress</strong> : Summarize, deduplicate, and extract structured facts. Keep citations and loss bounds; store compact memories for retrieval.</li>
+                                <li><strong>Isolate</strong> : Sandbox risky steps and separate privileges. Quarantine untrusted inputs, verify before committing to long-term memory or side effects.</li>
+                            </ol>
+                            
+                            <p>
+                                Most production flows chain these: <em>Select → Retrieve → Compress → Write</em>, with <em>Isolate</em> wrapped around calls that touch external systems.
+                            </p>
+                            
+                            <div class="image-container">
+                                <img src="../media/agents_classification.png" alt="Agent Classification" class="post-image">
+                                <div class="image-caption">Agent Classification</div>
+                            </div>
+                            
+                            <div class="section-spacer"></div>
+
+                            <h2>Sound Engineering Practices for LLM Systems</h2>
+                            
+                            <p>
+                                Treat LLM calls as an unreliable, high-latency, paid dependency. Engineer the system around that reality.
+                            </p>
+                            
+                            <div class="truth-quote">
+                                <strong>Best Mental Model:</strong> Design LLM systems as DAGs (Directed Acyclic Graphs) and architect the entire system accordingly. This approach naturally handles dependencies, parallelization, and error propagation.
+                            </div>
+                            
+                            <div class="image-container">
+                                <video controls class="post-image">
+                                    <source src="../media/everything_dag.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div class="image-caption">DAG-based LLM System Architecture</div>
+                            </div>
+                            
+                            <h3>Without Batching (Single-Request Paths)</h3>
+                            
+                            <ul>
+                                <li><strong>Strict contracts:</strong> Use schemas (JSON, regex, XML tags) and validate outputs before use.</li>
+                                <li><strong>Idempotency keys:</strong> Make calls idempotent and safe to retry; dedupe by key.</li>
+                                <li><strong>Timeouts and circuit breakers:</strong> Fail fast; degrade gracefully with cached or template responses.</li>
+                                <li><strong>Observability:</strong> Log prompts, model, temperature, token counts, latency, and result hashes.</li>
+                                <li><strong>Prompt versioning:</strong> Pin prompt+model as a version; roll out with canaries.</li>
+                                <li><strong>Small-context principle:</strong> Keep inputs minimal; retrieve only relevant snippets with citations.</li>
+                                <li><strong>Determinism when possible:</strong> Use low temperature and seed control for critical paths.</li>
+                            </ul>
+                            
+                            <h3>With Batching (Many-Request Paths)</h3>
+                            
+                            <ul>
+                                <li><strong>Group by shape:</strong> Batch only requests with the same prompt shape and similar token lengths.</li>
+                                <li><strong>Token-aware packing:</strong> Pack inputs to stay under model limits; cap max tokens per batch.</li>
+                                <li><strong>Parallelism with backpressure:</strong> Use worker pools; bound concurrency per model/region to avoid throttling.</li>
+                                <li><strong>Retry strategy:</strong> Exponential backoff on 429/5xx; jitter; split failing batches into smaller ones.</li>
+                                <li><strong>Cost controls:</strong> Enforce budgets per job/tenant; preflight estimate tokens before submit.</li>
+                                <li><strong>Partial results:</strong> Stream and persist per-item results; resume from last successful index.</li>
+                                <li><strong>Quality sampling:</strong> Sample 1–5% for secondary verification or human review.</li>
+                            </ul>
+                            
+                            <div class="truth-quote">
+                                <strong>Throughput Insight:</strong> Most savings come from batching small, homogeneous prompts. For heterogenous, long prompts, retrieval and compression usually outperform batching for quality and cost.
+                            </div>
+                            
+                            <h3>Shared Patterns</h3>
+                            
+                            <ul>
+                                <li><strong>Caching tiers:</strong> Prompt+input hash cache (short TTL) and durable result cache for immutable tasks.</li>
+                                <li><strong>Verification step:</strong> Add a cheap rule-based or small-model verifier before committing side effects.</li>
+                                <li><strong>Guarded tools:</strong> Restrict tool permissions; simulate effects first; require confirmation for risky actions.</li>
+                                <li><strong>Data governance:</strong> Redact PII before calls; maintain audit trails and consent logs.</li>
+                                <li><strong>Evaluation harness:</strong> Maintain regression tests with golden prompts and expected properties.</li>
+                            </ul>
 
 
-What works?
-1) High agency
-2) Domain expertise
+                            <h2>Context Failures And Techniques to Mitigate Them</h2>
+                            
+                            <p>
+                                When LLM applications rely on conversation history, retrieved documents, and tool outputs, failure modes often originate in the context you assemble. Below are four common pitfalls and concrete mitigations.
+                            </p>
 
-What doesn't works?
-0) There are no shortcuts. The more of an expert you are, the more you can do with LLMs.
-1) One size fits all LLMs
-2) LLMs have fundamental limitations, tasks that they really can't do at all. Such limits are more apparent on multi-modal tasks. This is true even with task breakdowns.
-3) Agents never worked for me. Workflows are your best friends.
+                            <h3>1) Context poisoning</h3>
+                            
+                            <p>
+                                Context poisoning is when incorrect, adversarial, or low-quality information enters short- or long-term memory and propagates into future answers.
+                            </p>
 
-Workflow types
-- Chain of thought
+                            <ul>
+                                <li><strong>Validation and quarantine:</strong> Isolate different context types in separate threads; validate all information before adding it to long-term memory. If you detect potential poisoning, start a fresh thread to quarantine it so bad information cannot spread to future interactions.</li>
+                                <li><strong>Typed memory lanes:</strong> Keep retrieved facts, user preferences, and tool outputs in distinct namespaces. Never merge lanes without verification.</li>
+                                <li><strong>Multi-source corroboration:</strong> Accept new facts only if multiple independent sources agree. Track provenance and trust scores; decay or discard low-trust items.</li>
+                                <li><strong>Human-in-the-loop for high-impact updates:</strong> Route updates that change system behavior or policy for review.</li>
+                                <li><strong>Rollback and expiry:</strong> Version long-term memory with reversible changes and TTLs for unverified facts.</li>
+                            </ul>
 
-Architecture
-- Data pipelines are your best friends.
+                            <h3>2) Context distraction</h3>
+                            
+                            <p>
+                                Context distraction happens when your context grows so large that the model starts focusing too much on the accumulated history instead of using what it learned during training.
+                            </p>
+
+                            <ul>
+                                <li><strong>Windowed context:</strong> Keep only the most recent turns plus a compact summary of earlier content.</li>
+                                <li><strong>Summarize with anchors:</strong> Reduce history to structured, cited "facts" the model can rely on, not raw transcripts.</li>
+                                <li><strong>Retrieval gating:</strong> Retrieve only if the current task requires it; include results that pass relevance thresholds and task constraints.</li>
+                                <li><strong>Instruction re-centering:</strong> Add a system directive to prefer pretrained knowledge and use context only when explicitly relevant.</li>
+                                <li><strong>Task-specific profiles:</strong> Maintain a compact user/task profile separate from chat history to avoid repetition.</li>
+                            </ul>
+
+                            <h3>3) Context confusion</h3>
+                            
+                            <p>
+                                Context confusion happens when you include extra information that the model uses to generate bad responses, even when that information isn’t relevant to the current task.
+                            </p>
+
+                            <ul>
+                                <li><strong>Strict schemas and delimiters:</strong> Wrap sources in <code>&lt;document&gt;</code> tags with metadata and separate <code>&lt;instructions&gt;</code>, <code>&lt;examples&gt;</code>, and <code>&lt;query&gt;</code> blocks.</li>
+                                <li><strong>Relevance filters:</strong> Gate inclusions by embedding similarity and topic constraints; exclude near-duplicates and tangents.</li>
+                                <li><strong>Negative instructions:</strong> Tell the model to ignore unrelated content and cite only from allowed sources.</li>
+                                <li><strong>Distraction tests:</strong> Seed canary facts or known traps during evaluation; drop items that consistently bias answers.</li>
+                                <li><strong>Unitize prompts:</strong> Keep one primary task per call; split secondary tasks into separate steps.</li>
+                            </ul>
+
+                            <h3>4) Context clash</h3>
+                            
+                            <p>
+                                Context clash happens when you gather information and tools in your context that directly conflict with other information already there.
+                            </p>
+
+                            <ul>
+                                <li><strong>Authority ranking and source of truth:</strong> Define precedence rules (e.g., tool output &gt; curated KB &gt; user memory &gt; raw web) and enforce them.</li>
+                                <li><strong>Conflict detection:</strong> Extract claims and check for contradictions via rules or a verifier model; ask clarifying questions before acting.</li>
+                                <li><strong>Versioning and timestamps:</strong> Prefer the most recent or highest-trust source; present both views with citations when uncertain.</li>
+                                <li><strong>Tool arbitration:</strong> If tools disagree, run a verification step or cross-check with an additional tool; escalate to a human when confidence is low.</li>
+                                <li><strong>Deterministic policies:</strong> Encode tie-breakers and fallback behaviors so outcomes are reproducible.</li>
+                            </ul>
+
+                            <div class="section-spacer"></div>
 
 
-Recommendations
-1) Build your own router. I haven't found a single one that is neither simple nor fits all the checkboxes.
-2) Neo4J is not worth it. Free tier is too limited. Paid tier is too expensive. Learning curve doesn't even apply to other tools. 
-3) Postgresql.
-4) I will put my bet on Apache Airflow when it comes to complex workflows. Haven't tried newer tools though. There might be something interesting in there.
-5) Use LLM batching to reduce cost.
-6) Only use LLMs if there is no other way. 
-7) More the number of input tokens, lower is the quality of the output.
-8) The more of an expert you are, the more you can do with LLMs. For example, for Widushi we have go through the state of the art pedagogical research for the tasks we are interested in.
-9) As LLMs are getting better, the impact of prompts matter more than examples.
+                            <h2>Prompt Engineering Best Practices</h2>
+                            
+                            <p>
+                                Based on extensive experience with LLM systems, here are key strategies for effective prompt engineering:
+                            </p>
 
-Once the LLM proposes a prompt, I run it on a few typical examples. If the results are off, I don’t just tweak the prompt manually. Instead, I ask the LLM to do so, asking specifically for a generic correction,
+                            <ol>
+                                <li><strong>Put longform data at the top:</strong> Place your long documents and inputs (~20K+ tokens) near the top of your prompt, above your query, instructions, and examples. This ensures the model has access to the most comprehensive context first.</li>
+                                <li><strong>Structure document content and metadata with XML tags:</strong> When using multiple documents, wrap each document in &lt;document&gt; tags with &lt;document_content&gt; and &lt;source&gt; (and other metadata) subtags for clarity. This structured approach helps the model better understand the relationship between different pieces of information.</li>
+                            </ol>
 
+                            <div class="truth-quote">
+                                <strong>Context Ordering Insight:</strong> The order of information in your prompt matters significantly. Long documents should come first, followed by specific instructions, then examples. This mimics how humans process information—we need the full picture before diving into specifics.
+                            </div>
 
+                            <div class="section-spacer"></div>
 
-Multi-step tasks
+                            <h2>Battle-Tested Observations</h2>
+                            
+                            <div class="truth-quote">
+                                <strong>Best to build your own frameworks for deeper control. 3rd party frameworks don't help much.</strong>
+                            </div>
+                            
+                            <p>
+                                Here are some hard-earned insights from building production LLM systems:
+                            </p>
+
+                            <ol>
+                                
+                                <li><strong>Neo4J is not worth it.</strong> Free tier is too limited. Paid tier is too expensive. Learning curve doesn't even apply to other tools.</li>
+                                <li><strong>PostgreSQL is love.</strong> Reliable, scalable, and battle-tested for most use cases.</li>
+                                <li><strong>Apache Airflow for complex workflows.</strong> I will put my bet on Apache Airflow when it comes to complex workflows. Haven't tried newer tools though—there might be something interesting out there.</li>
+                                <li><strong>Use LLM batching to reduce cost.</strong> Batch similar requests whenever possible.</li>
+                                <li><strong>Only use LLMs if there is no other way.</strong> Traditional programming solutions are often more reliable and cost-effective.</li>
+                                <li><strong>More input tokens = lower quality output.</strong> Keep context focused and relevant.</li>
+                                <li><strong>Domain expertise amplifies LLM capabilities.</strong> The more of an expert you are, the more you can do with LLMs. For example, for Widushi we have gone through state-of-the-art pedagogical research for the tasks we are interested in.</li>
+                                <li><strong>Prompts matter more than examples.</strong> As LLMs are getting better, the impact of prompts matters more than examples, especially with context confusion.</li>
+                            </ol>
+
+                            <div class="section-spacer"></div>
+
+                            <h2>The Meta-Prompt Strategy</h2>
+                            
+                            <p>
+                                Once the LLM proposes a prompt, I run it on a few typical examples. If the results are off, I don't just tweak the prompt manually. Instead, I ask the LLM to do so, asking specifically for a generic correction. This meta-approach often yields better results than manual prompt engineering.
+                            </p>
+
+                            <div class="truth-quote">
+                                "The key to reliable LLMs isn't just better prompts—it's better systems, better processes, and better understanding of what these models can and cannot do reliably."
+                            </div>
+                        </div>
+                        
+                        <div class="post-navigation">
+                            <a href="../blog.html" class="back-link">← Back to Blog</a>
+                        </div>
+                    </div>
+                    
+                    <aside class="sidebar">
+                        <h3>Latest Posts</h3>
+                        
+                        <div class="sidebar-post">
+                            <div class="sidebar-post-category">AI & Technology</div>
+                            <h4><a href="the-worlds-most-advanced-ai-for-handwritten-evaluation.html">The World's Most Advanced AI for Handwritten Answer Evaluation</a></h4>
+                            <div class="sidebar-post-date">July 26, 2025</div>
+                            <div class="sidebar-post-excerpt">Imagine an AI that reads any handwriting and understands complex diagrams, tables, and flowcharts.</div>
+                        </div>
+                        
+                        <div class="sidebar-post">
+                            <div class="sidebar-post-category">Education & Technology</div>
+                            <h4><a href="launching-widushi.html">Founder's Motivation Notes for Widushi</a></h4>
+                            <div class="sidebar-post-date">July 3, 2025</div>
+                            <div class="sidebar-post-excerpt">India stands at a defining moment with 800+ million Indians under 35. The real return on education lies in unlocking human potential.</div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sanjay Thakur. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
