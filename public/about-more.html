@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanjay Thakur — More About Me</title>
+  <meta name="description" content="More about Sanjay Thakur — the person behind the systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="theme.css" />
+  <style>
+    .about {
+      padding: 70px 0 8px;
+    }
+    .about__head {
+      margin-bottom: 44px;
+    }
+    .about__label {
+      font-size: 12.5px;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      margin: 0 0 14px;
+    }
+    .about__title {
+      font-size: clamp(28px, 4.4vw, 42px);
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin: 0 0 10px;
+    }
+    .about__subtitle {
+      color: var(--muted);
+      font-size: 14.5px;
+      margin: 0;
+    }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .prose p {
+      color: #cfcfcf;
+      font-size: 15px;
+      line-height: 1.8;
+      margin: 0 0 18px;
+    }
+    .prose a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s var(--ease);
+    }
+    .prose a:hover {
+      border-color: var(--accent);
+    }
+
+    .block {
+      border: 1px solid var(--border);
+      padding: 26px 28px;
+      margin: 0 0 26px;
+    }
+    .block__title {
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin: 0 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .block__title::before {
+      content: "//";
+      color: var(--muted);
+    }
+
+    .bio-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .bio-list li {
+      position: relative;
+      padding-left: 22px;
+      margin: 0 0 16px;
+      color: #cfcfcf;
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+    .bio-list li:last-child {
+      margin-bottom: 0;
+    }
+    .bio-list li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    .bio-list strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .bio-list em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .bio-footer {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pinned {
+      border: 1px solid var(--border);
+      padding: 22px;
+      position: sticky;
+      top: calc(var(--nav-h) + 24px);
+    }
+    .pinned__title {
+      font-size: 12.5px;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      margin: 0 0 18px;
+    }
+    .pinned-card {
+      display: block;
+      border-left: 2px solid var(--accent);
+      padding: 4px 0 4px 14px;
+      transition: padding 0.25s var(--ease);
+    }
+    .pinned-card:hover {
+      padding-left: 18px;
+    }
+    .pinned-tag {
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .pinned-card h4 {
+      font-size: 14.5px;
+      color: var(--text);
+      font-weight: 500;
+      margin: 8px 0 6px;
+      line-height: 1.4;
+    }
+    .pinned-card .date {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    .pinned-card .excerpt {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0 0 10px;
+    }
+    .pinned-card .read {
+      font-size: 12.5px;
+      color: var(--accent);
+    }
+
+    @media (max-width: 860px) {
+      .about__grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .pinned {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html">markovstate.sh ~<span class="cursor"></span></a>
+      <nav>
+        <ul class="nav__links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">Work so far</a></li>
+          <li><a href="blog.html">Blog Posts</a></li>
+          <li><a href="about-more.html" class="is-active">More About Me</a></li>
+        </ul>
+      </nav>
+      <div class="nav__status">system: online <span class="status-dot"></span></div>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="about">
+      <div class="container">
+        <div class="about__head reveal">
+          <p class="about__label">/ more about me</p>
+          <h1 class="about__title">About Me</h1>
+          <p class="about__subtitle">Get to know the person behind the systems.</p>
+        </div>
+
+        <div class="about__grid reveal">
+          <div class="prose">
+            <p>Hi again! I'm Sanjay. Previously, I founded Markovian AI which was acquired in 2023. Between 2023 and June 2025, I led engineering at Curium (Singapore), building real-time, high-throughput IoT systems for asset tracking.</p>
+
+            <p>With a CS Master's from Mila/McGill and undergrad from MNIT Jaipur, I'm driven by solving meaningful problems with technology. This mission fuels me daily. Stay tuned &mdash; the best is yet to come.</p>
+
+            <div class="block">
+              <h2 class="block__title">interesting things i've done so far</h2>
+              <ul class="bio-list">
+                <li>I built and sold <strong>Markovian AI</strong> which was a data-search engine in Toronto. Think of it as a Google-for-enterprises before things like RAG, LLM was a cool thing.</li>
+                <li>I gained the dark knowledge of controlling ML behavior at the best ML research institute in the world &ndash; <strong>Mila</strong> and published at top-tier conferences. See my <a href="https://scholar.google.com/citations?user=vihuOn4AAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar page</a> here. To date I have accumulated over 700 citations.</li>
+                <li>At the age of 19 years, I built and patented an app that was purchased by the <strong>Indian Railways</strong>. I owe it to Zine which facilitated this opportunity when I was pursuing my Bachelor's degree.</li>
+                <li>During my third year of undergraduate, I built a <strong>Smartmeter</strong> for home automation, power saving and power grid balance. It was patented and awarded the runner-up prize at GridTech'15 International Conference &amp; Exhibition.</li>
+                <li>I have been part of the only team that has won the most popular sports tournament of my university called <strong>Hong Kong Sixes</strong> twice in the 80+ years of university history.</li>
+              </ul>
+            </div>
+
+            <div class="block">
+              <h2 class="block__title">growing up &amp; inspirations</h2>
+              <p>I was born in Guwahati, Assam, a north-eastern state of India. However, I was raised in six different cities which are Guwahati, Trivandrum, Ranchi, Hyderabad, Neemuch, and Jaipur.</p>
+              <p>I am a big admirer of Aaron Swartz and Elon Musk and I deeply admire their work. I am even a bigger fan of Virat Kohli. I would be very happy if I can be even a fraction passionate, hard-working, go-getter, and mentally strong as he is.</p>
+              <p>There are many other personalities too who I always look up to. Some of them are Narendra Modi, Dr. APJ Abdul Kalam, and MS Dhoni.</p>
+            </div>
+
+            <div class="block">
+              <h2 class="block__title">escapades</h2>
+              <p>I am also a movieholic, and my favorite movie so far has been Lakshya. For some mysterious reason, I can't get enough of the Bhavesh Joshi movie either.</p>
+              <p>Sometimes you would also find me immersed into a book. I find them a great way to stimulate my mind. A couple of awesome books that I recently read and found useful are:</p>
+              <ul class="bio-list">
+                <li><em>A Skeptics' Guide to the Universe</em></li>
+                <li><em>Skunk Works: A Personal Memoir of My Years at Lockheed</em></li>
+              </ul>
+              <p class="bio-footer">That's all about me. Feel free to hit me up on <a href="https://x.com/WanabeMarkovian" target="_blank" rel="noopener">X</a>. And keep following my blog for posts that I intend to get more regular about.</p>
+            </div>
+          </div>
+
+          <aside class="pinned">
+            <p class="pinned__title">/ pinned</p>
+            <a class="pinned-card" href="posts/be-a-markov-state.html">
+              <span class="pinned-tag">pinned</span>
+              <h4>Be a Markov State &mdash; A Lesson for Life</h4>
+              <p class="date">May 7, 2025</p>
+              <p class="excerpt">A reflection on how the Markov property can guide us in living a purposeful life, focusing on the present rather than being trapped by the past.</p>
+              <span class="read">read more &rarr;</span>
+            </a>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="footer__copy">&copy; 2026 Sanjay Thakur</span>
+      <div class="footer__social">
+        <a href="https://github.com/sanjaythakur" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sanjaykthakur9/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+        </a>
+        <a href="https://x.com/WanabeMarkovian" target="_blank" rel="noopener" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.66l7.73-8.84L1.24 2.25h6.83l4.71 6.23 5.46-6.23Zm-1.16 17.52h1.83L7.01 4.13H5.05l12.03 15.64Z"/></svg>
+        </a>
+        <a href="mailto:sttsanjay@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"/><path d="m3 6 9 6 9-6"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("nav");
+      var toggle = document.getElementById("navToggle");
+      var links = document.getElementById("navLinks");
+      if (toggle) {
+        toggle.addEventListener("click", function () {
+          nav.classList.toggle("is-open");
+          links.classList.toggle("is-open");
+        });
+      }
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        el.classList.add("is-in");
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+/* ============================================================
+   Blog post pages — dark theme layer on top of theme.css.
+   Restyles the existing post markup + overrides the per-post
+   inline light styles (hence body-prefixed selectors + !important).
+   ============================================================ */
+
+:root {
+  --prose: #c9c9c9;
+}
+
+/* ------------------------------- Layout -------------------------------- */
+
+main {
+  padding-top: calc(var(--nav-h) + 40px);
+  padding-bottom: 24px;
+}
+
+.blog-post .container {
+  max-width: 1040px;
+}
+
+.blog-post h1 {
+  font-size: clamp(28px, 4.2vw, 40px);
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.post-date {
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin: 0 0 36px;
+}
+
+/* ----------------------------- Two-column ------------------------------ */
+
+.main-content-wrapper {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+.article-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ------------------------------- Prose --------------------------------- */
+
+body .post-content {
+  color: var(--prose);
+  font-size: 16px;
+  line-height: 1.85;
+  max-width: 760px;
+}
+
+body .post-content h2 {
+  color: var(--text) !important;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin: 48px 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+body .post-content h3 {
+  color: var(--text) !important;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 32px 0 12px;
+}
+
+body .post-content h4 {
+  color: var(--text) !important;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 24px 0 10px;
+}
+
+body .post-content p {
+  margin: 18px 0;
+  text-align: left !important;
+}
+
+body .post-content ul,
+body .post-content ol {
+  margin: 18px 0;
+  padding-left: 22px;
+}
+body .post-content li {
+  margin: 8px 0;
+}
+body .post-content ul li::marker {
+  color: var(--accent);
+}
+body .post-content ol li::marker {
+  color: var(--muted);
+}
+
+body .post-content strong,
+body .post-content b {
+  color: var(--text) !important;
+  font-weight: 600;
+}
+
+body .post-content a {
+  color: var(--accent) !important;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s var(--ease);
+}
+body .post-content a:hover {
+  border-color: var(--accent);
+}
+
+body .post-content blockquote {
+  margin: 28px 0;
+  padding: 4px 0 4px 20px;
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+}
+
+body .post-content code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--accent);
+}
+body .post-content pre {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  overflow-x: auto;
+}
+body .post-content pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--prose);
+}
+
+body .post-content hr,
+.section-spacer {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+  margin: 40px 0;
+}
+
+/* ------------------------------- Media --------------------------------- */
+
+.post-content img,
+.post-content video,
+.image-container img,
+.post-image,
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+body .image-container,
+body .system-failures-image-container,
+body .image-grid {
+  background: var(--bg-soft) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  border-radius: 12px;
+  padding: 18px;
+  margin: 32px 0;
+}
+body .image-container img,
+body .post-image,
+body .system-failures-image {
+  border-radius: 8px;
+  box-shadow: none !important;
+  border: 1px solid var(--border);
+}
+
+body .image-caption,
+body .video-caption {
+  color: var(--muted) !important;
+  font-size: 13px;
+  font-style: normal;
+  margin-top: 12px;
+}
+
+/* ------------------------------ Callouts ------------------------------- */
+
+body .markov-definition,
+body .sanskrit-verse,
+body .power-quote,
+body .vision-quote,
+body .truth-quote {
+  background: var(--bg-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-left: 3px solid var(--accent) !important;
+  border-radius: 0 10px 10px 0;
+  box-shadow: none !important;
+  margin: 32px 0;
+  padding: 22px 26px;
+  font-weight: 400;
+  text-align: left !important;
+}
+body .sanskrit-text {
+  color: var(--accent) !important;
+  font-style: normal;
+}
+body .sanskrit-translation {
+  color: var(--muted) !important;
+}
+
+/* --------------------- Bespoke component overrides --------------------- */
+/* These posts ship their own light "infographic" components; keep their
+   layout but flip the palette to the dark system. */
+
+body .ai-capabilities-container,
+body .future-tech-container,
+body .widushi-pillars-container,
+body .widushi-cta,
+body .global-impact-section,
+body .technical-challenges,
+body .tech-timeline,
+body .market-stats-container,
+body .market-stats-grid,
+body .progress-stages,
+body .capabilities-grid,
+body .impact-cards,
+body .demo-videos-section,
+body .demo-videos-grid,
+body .capability-card,
+body .stat-card,
+body .impact-card,
+body .timeline-item,
+body .progress-stage,
+body .demo-video-item,
+body .demo-video-container,
+body .pillars-diagram,
+body .trade-offs-table {
+  background: var(--bg-soft) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  color: var(--prose) !important;
+}
+
+/* Headings inside bespoke containers stay light/legible */
+body .widushi-cta h1,
+body .widushi-cta h2,
+body .widushi-cta h3,
+body .widushi-cta h4,
+body .global-impact-section h2,
+body .ai-capabilities-container h2 {
+  color: var(--text) !important;
+}
+
+body .capability-title,
+body .impact-title,
+body .stage-title,
+body .stat-number,
+body .timeline-date,
+body .cta-text {
+  color: var(--text) !important;
+}
+
+body .capability-description,
+body .stage-description,
+body .stat-label,
+body .pillars-description,
+body .impact-flag {
+  color: var(--muted) !important;
+}
+
+body .capability-icon,
+body .cta-icon,
+body .pillar-circle {
+  color: var(--accent) !important;
+}
+
+body .cta-button {
+  background: var(--accent) !important;
+  color: #021a10 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Tables */
+body .post-content table,
+body .trade-offs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 28px 0;
+  font-size: 14px;
+}
+body .post-content th,
+body .post-content td {
+  border: 1px solid var(--border) !important;
+  padding: 10px 12px;
+  text-align: left;
+  color: var(--prose);
+}
+body .post-content th {
+  color: var(--text) !important;
+  background: var(--bg-soft) !important;
+}
+
+/* --------------------------- Post navigation --------------------------- */
+
+.post-navigation {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.back-link {
+  color: var(--muted);
+  font-size: 14px;
+  transition: color 0.25s var(--ease);
+}
+.back-link:hover {
+  color: var(--accent);
+}
+
+/* ------------------------------- Sidebar ------------------------------- */
+
+body .sidebar {
+  width: 290px;
+  flex-shrink: 0;
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  padding: 22px !important;
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+body .sidebar h3 {
+  color: var(--muted) !important;
+  font-size: 12.5px;
+  letter-spacing: 1.5px;
+  font-weight: 400;
+  text-transform: lowercase;
+  border-bottom: 1px solid var(--border) !important;
+  padding-bottom: 12px;
+  margin: 0 0 16px;
+}
+body .sidebar-post {
+  border-bottom: 1px solid var(--border) !important;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+body .sidebar-post-category {
+  color: var(--accent) !important;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+body .sidebar-post h4 a {
+  color: var(--text) !important;
+}
+body .sidebar-post h4 a:hover {
+  color: var(--accent) !important;
+}
+body .sidebar-post-date {
+  color: var(--muted) !important;
+  font-size: 12px;
+}
+body .sidebar-post-excerpt {
+  color: var(--muted) !important;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+/* ----------------------------- Responsive ------------------------------ */
+
+@media (max-width: 860px) {
+  .main-content-wrapper {
+    flex-direction: column;
+  }
+  body .sidebar {
+    width: 100%;
+    position: static;
+    margin-top: 32px;
+  }
+}
