@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanjay Thakur | Battle-Tested Mental Models for Reliable LLMs</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>if("noModule"in HTMLScriptElement.prototype){document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.remove("js")},4000)}</script>
+    <link rel="preload" href="../vendor/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../vendor/fonts/ibm-plex-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Crect x='11' y='7' width='10' height='18' fill='%2359f3b0'/%3E%3C/svg%3E">
+    <link rel="canonical" href="https://markovstate.sh/posts/battle-tested-mental-models-for-relliable-llms.html">
+    <meta name="description" content="Lessons learned the hard way: going from prototype to production with LLMs is harder than you think. Here are the mental models and engineering practices that actually work when building reliable AI systems.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="markovstate.sh">
+    <meta property="og:title" content="Battle-Tested Mental Models for Reliable LLMs">
+    <meta property="og:description" content="Lessons learned the hard way: going from prototype to production with LLMs is harder than you think. Here are the mental models and engineering practices that actually work when building reliable AI systems.">
+    <meta property="og:url" content="https://markovstate.sh/posts/battle-tested-mental-models-for-relliable-llms.html">
+    <meta name="twitter:card" content="summary">
     <link rel="stylesheet" href="../theme.css">
     <link rel="stylesheet" href="post.css">
     <style>
@@ -237,7 +246,7 @@
         }
     </style>
 </head>
-<body>
+<body data-page="post">
     <header class="nav" id="nav">
         <div class="nav__inner">
             <a class="brand" href="../index.html">markovstate.sh ~<span class="cursor"></span></a>
@@ -256,11 +265,14 @@
         </div>
     </header>
 
+    <nav class="hud hud--desktop" id="hud" aria-label="Site states"></nav>
+
     <main>
         <article class="blog-post">
             <div class="container">
                 <div class="main-content-wrapper">
                     <div class="article-content">
+                        <div class="post-header" aria-hidden="true"><canvas></canvas></div>
                         <h1>Battle-Tested Mental Models for Reliable LLMs</h1>
                         <p class="post-date">August 25, 2025</p>
                         
@@ -299,11 +311,11 @@
                                     <div class="image-caption">The Task</div>
                                 </div>
                                 <div class="image-container">
-                                    <img src="../media/cheap_demo.png" alt="Cheap Demo" class="post-image">
+                                    <img src="../media/opt/cheap_demo.webp" width="1271" height="129" loading="lazy" decoding="async" alt="Cheap Demo" class="post-image">
                                     <div class="image-caption">The Cheap Demo</div>
                                 </div>
                                 <div class="image-container">
-                                    <img src="../media/pure_bliss.png" alt="Pure Bliss" class="post-image">
+                                    <img src="../media/opt/pure_bliss.webp" width="1237" height="139" loading="lazy" decoding="async" alt="Pure Bliss" class="post-image">
                                     <div class="image-caption">Pure Bliss</div>
                                 </div>
                             </div>
@@ -350,12 +362,12 @@
                             <h2>Context Engineering: The Key to Reliability</h2>
                             
                             <div class="image-container">
-                                <img src="../media/context_engineering.png" alt="Context Engineering" class="post-image">
+                                <img src="../media/opt/context_engineering.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Context Engineering" class="post-image">
                                 <div class="image-caption">Context Engineering Framework</div>
                             </div>
 
                             <div class="image-container">
-                                <img src="../media/another_way_to_see_context_engineering.png" alt="Another way to see Context Engineering" class="post-image">
+                                <img src="../media/opt/another_way_to_see_context_engineering.webp" width="927" height="618" loading="lazy" decoding="async" alt="Another way to see Context Engineering" class="post-image">
                                 <div class="image-caption">Another perspective on Context Engineering</div>
                             </div>
 
@@ -368,7 +380,7 @@
                             </p>
 
                             <div class="image-container">
-                                <img src="../media/chaining_mental_model.png" alt="Chaining Mental Models" class="post-image">
+                                <img src="../media/opt/chaining_mental_model.webp" width="1600" height="1111" loading="lazy" decoding="async" alt="Chaining Mental Models" class="post-image">
                                 <div class="image-caption">Chaining Mental Models for Complex Tasks</div>
                             </div>
 
@@ -380,11 +392,11 @@
 
                             <div class="image-grid">
                                 <div class="image-container">
-                                    <img src="../media/planner.png" alt="Planner" class="post-image">
+                                    <img src="../media/opt/planner.webp" width="1124" height="455" loading="lazy" decoding="async" alt="Planner" class="post-image">
                                     <div class="image-caption">Basic Planner Architecture</div>
                                 </div>
                                 <div class="image-container">
-                                    <img src="../media/more_planner.png" alt="More planner" class="post-image">
+                                    <img src="../media/opt/more_planner.webp" width="1600" height="1039" loading="lazy" decoding="async" alt="More planner" class="post-image">
                                     <div class="image-caption">Advanced Planner Patterns</div>
                                 </div>
                             </div>
@@ -438,7 +450,7 @@
                             </p>
 
                             <div class="image-container">
-                                <img src="../media/memories.png" alt="Memories" class="post-image">
+                                <img src="../media/opt/memories.webp" width="1600" height="515" loading="lazy" decoding="async" alt="Memories" class="post-image">
                                 <div class="image-caption">Memories</div>
                             </div>
                             
@@ -467,7 +479,7 @@
                             </p>
                             
                             <div class="image-container">
-                                <img src="../media/agents_classification.png" alt="Agent Classification" class="post-image">
+                                <img src="../media/opt/agents_classification.webp" width="1600" height="569" loading="lazy" decoding="async" alt="Agent Classification" class="post-image">
                                 <div class="image-caption">Agent Classification</div>
                             </div>
                             
@@ -484,8 +496,8 @@
                             </div>
                             
                             <div class="image-container">
-                                <video controls class="post-image">
-                                    <source src="../media/everything_dag.mp4" type="video/mp4">
+                                <video preload="none" controls class="post-image" data-poster="../media/opt/everything_dag-poster.webp" width="1280" height="792">
+                                    <source src="../media/opt/everything_dag.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                                 <div class="image-caption">DAG-based LLM System Architecture</div>
@@ -699,5 +711,7 @@
         }
       })();
     </script>
+    <script src="../blogData.js"></script>
+    <script type="module" src="../js/motion/post.js"></script>
 </body>
 </html>

@@ -30,7 +30,7 @@ const blogPosts = [
   },
   {
     "title": "Be a Markov State - A Lesson for Life",
-    "date": "May 20, 2025",
+    "date": "May 7, 2025",
     "category": "AI",
     "excerpt": "Of course, life isn't a perfect Markov process. Our states are often colored by complex histories. But as a mental model, it's empowering. It shifts our focus from helplessness to agency, from nostalgia or guilt to responsibility.",
     "file": "posts/be-a-markov-state.html"

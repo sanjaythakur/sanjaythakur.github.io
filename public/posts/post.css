@@ -378,13 +378,88 @@ body .sidebar-post-excerpt {
 
 /* ----------------------------- Responsive ------------------------------ */
 
+/* Bespoke grids may never force the column wider than the screen. */
+body .demo-videos-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+}
+
 @media (max-width: 860px) {
   .main-content-wrapper {
     flex-direction: column;
+    align-items: stretch;
+  }
+  .article-content {
+    width: 100%;
+  }
+  /* Wide tables scroll inside the column instead of widening the page. */
+  body .post-content table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
   }
   body .sidebar {
     width: 100%;
     position: static;
     margin-top: 32px;
   }
+}
+
+/* ------------------------- Generative header --------------------------- */
+/* Deterministic per post (js/motion/post-header.js). Space is reserved here
+   so drawing never shifts the layout. */
+
+.post-header {
+  height: 200px;
+  margin: 0 0 32px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 14px;
+}
+.post-header canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 620px) {
+  .post-header {
+    height: 120px;
+    margin-bottom: 24px;
+  }
+}
+
+/* Anchor jumps land below the fixed nav. */
+.post-content h2 {
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+/* Diagrams may fade in once, gently. Text never moves. */
+html.js .post-content img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity var(--dur-reveal) var(--ease);
+}
+html.js .post-content img[loading="lazy"].is-loaded {
+  opacity: 1;
+}
+
+/* Leftover light-theme surfaces in bespoke post components (contrast fixes). */
+body .challenge-list li {
+  background: var(--bg-soft) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  color: var(--prose) !important;
+}
+body .post-content table,
+body .post-content thead,
+body .post-content tr {
+  background: var(--bg-soft) !important;
+  box-shadow: none !important;
+}
+body .post-content thead th {
+  color: var(--text) !important;
+}
+body .cta-button .cta-text {
+  color: #021a10 !important;
+}
+/* Inline-coloured (highlighted) table cells: keep the emphasis, as signal. */
+body .post-content td[style*="color"] {
+  color: var(--accent) !important;
 }

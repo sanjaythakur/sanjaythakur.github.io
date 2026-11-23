@@ -5,9 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sanjay Thakur — Blog Posts</title>
   <meta name="description" content="Essays and notes on AI, engineering, and building in the real world." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script>if("noModule"in HTMLScriptElement.prototype){document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.remove("js")},4000)}</script>
+  <link rel="preload" href="vendor/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="vendor/fonts/ibm-plex-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Crect x='11' y='7' width='10' height='18' fill='%2359f3b0'/%3E%3C/svg%3E" />
+  <link rel="canonical" href="https://markovstate.sh/blog.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="markovstate.sh" />
+  <meta property="og:title" content="Sanjay Thakur — Blog Posts" />
+  <meta property="og:description" content="Essays and notes on AI, engineering, and building in the real world." />
+  <meta property="og:url" content="https://markovstate.sh/blog.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#050505" />
   <link rel="stylesheet" href="theme.css" />
   <style>
     .blog {
@@ -103,19 +112,27 @@
     }
 
     .post-card {
-      display: block;
-      padding: 26px 4px;
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 32px;
+      align-items: start;
+      padding: 28px 18px;
       border-top: 1px solid var(--border);
-      transition: background 0.25s var(--ease), padding 0.25s var(--ease),
-        transform 0.25s var(--ease);
+      transition: background var(--dur-ui) var(--ease-ui);
     }
     .posts-list .post-card:last-child {
       border-bottom: 1px solid var(--border);
     }
-    .post-card:hover {
+    .post-card:hover,
+    .post-card:focus-visible {
       background: var(--bg-soft);
-      padding-left: 16px;
-      transform: translateY(-2px);
+    }
+    .post-card__preview {
+      display: block;
+      width: 240px;
+      height: 135px;
+      border: 1px solid var(--border);
+      background: var(--bg);
     }
     .post-card__meta {
       display: flex;
@@ -123,25 +140,25 @@
       align-items: center;
       font-size: 12px;
       color: var(--muted);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .post-card__cat {
       color: var(--accent);
       text-transform: lowercase;
     }
     .post-card__title {
-      font-size: 19px;
+      font-size: 21px;
       font-weight: 500;
       color: var(--text);
-      margin: 0 0 10px;
+      margin: 0 0 12px;
       line-height: 1.35;
     }
     .post-card__excerpt {
       color: var(--muted);
       font-size: 14px;
-      line-height: 1.65;
-      margin: 0 0 14px;
-      max-width: 78ch;
+      line-height: 1.7;
+      margin: 0 0 16px;
+      max-width: 72ch;
     }
     .post-card__more {
       font-size: 13px;
@@ -149,16 +166,29 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: color 0.25s var(--ease);
+      transition: color var(--dur-micro) var(--ease-ui);
     }
-    .post-card:hover .post-card__more {
+    .post-card:hover .post-card__more,
+    .post-card:focus-visible .post-card__more {
       color: var(--accent);
     }
     .post-card__more .arrow {
-      transition: transform 0.25s var(--ease);
+      transition: transform var(--dur-micro) var(--ease-ui);
     }
-    .post-card:hover .post-card__more .arrow {
+    .post-card:hover .post-card__more .arrow,
+    .post-card:focus-visible .post-card__more .arrow {
       transform: translateX(4px);
+    }
+    @media (max-width: 720px) {
+      .post-card {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 24px 0;
+      }
+      .post-card__preview {
+        width: 100%;
+        height: 110px;
+      }
     }
 
     .pagination {
@@ -199,9 +229,14 @@
       color: var(--muted);
       padding: 30px 0;
     }
+    /* Hold the footer below the fold until the list renders (no layout shift). */
+    .posts-list:has(#loading) {
+      min-height: 100vh;
+    }
   </style>
 </head>
-<body>
+<body data-page="blog">
+  <div class="gridlines" aria-hidden="true"><div class="gridlines__inner"><span></span><span></span><span></span><span></span></div></div>
   <header class="nav" id="nav">
     <div class="nav__inner">
       <a class="brand" href="index.html">markovstate.sh ~<span class="cursor"></span></a>
@@ -219,6 +254,8 @@
       </button>
     </div>
   </header>
+
+  <nav class="hud" id="hud" aria-label="Site states"></nav>
 
   <main class="page">
     <section class="blog">
@@ -282,9 +319,6 @@
           links.classList.toggle("is-open");
         });
       }
-      document.querySelectorAll(".reveal").forEach(function (el) {
-        el.classList.add("is-in");
-      });
     })();
 
     var allPosts = [];
@@ -296,7 +330,9 @@
 
     function createPostHTML(post) {
       return (
-        '<a class="post-card" href="' + post.file + '">' +
+        '<a class="post-card glow" href="' + post.file + '">' +
+        '<canvas class="post-card__preview" aria-hidden="true" data-file="' + post.file + '" data-category="' + post.category + '"></canvas>' +
+        '<div class="post-card__body">' +
         '<div class="post-card__meta">' +
         '<span class="post-card__cat">' + post.category.toLowerCase() + "</span>" +
         "<span>" + post.date + "</span>" +
@@ -304,7 +340,7 @@
         '<h3 class="post-card__title">' + post.title + "</h3>" +
         '<p class="post-card__excerpt">' + post.excerpt + "</p>" +
         '<span class="post-card__more">continue reading <span class="arrow">&rarr;</span></span>' +
-        "</a>"
+        "</div></a>"
       );
     }
 
@@ -423,5 +459,6 @@
       setupPagination();
     });
   </script>
+  <script type="module" src="js/motion/blog.js"></script>
 </body>
 </html>

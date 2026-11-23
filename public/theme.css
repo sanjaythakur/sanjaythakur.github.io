@@ -3,6 +3,12 @@
    Minimal, premium, engineering-console aesthetic. Dark only.
    ============================================================ */
 
+/* Self-hosted IBM Plex Mono (SIL OFL, see vendor/fonts/OFL.txt). Latin subset. */
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 300; font-display: swap; src: url("vendor/fonts/ibm-plex-mono-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("vendor/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("vendor/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 600; font-display: swap; src: url("vendor/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); }
+
 :root {
   --bg: #050505;
   --bg-soft: #0a0a0a;
@@ -19,6 +25,18 @@
     Menlo, Consolas, monospace;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Motion tokens. Mirrored in js/motion/tokens.js; change both together. */
+  --ease-ui: cubic-bezier(0.2, 0, 0, 1);
+  --dur-micro: 200ms;
+  --dur-ui: 360ms;
+  --dur-reveal: 700ms;
+  --dur-hero: 1600ms;
+  --stagger: 60ms;
+  --travel: 14px;
+
+  --grid-line: rgba(242, 242, 242, 0.05);
+  --hud-w: 132px;
 }
 
 * {
@@ -29,9 +47,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* clip, not hidden: hidden turns body into a scroll container and breaks
+   position: sticky everywhere. */
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -290,9 +310,15 @@ a {
 
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-  will-change: opacity, transform;
+  transform: translateY(var(--travel));
+  transition: opacity var(--dur-reveal) var(--ease),
+    transform var(--dur-reveal) var(--ease);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
+}
+/* Without JS nothing is hidden. site.js adds .js to <html> before first paint. */
+html:not(.js) .reveal {
+  opacity: 1;
+  transform: none;
 }
 .reveal.is-in {
   opacity: 1;
@@ -333,6 +359,309 @@ a {
   100% {
     box-shadow: 0 0 0 0 rgba(89, 243, 176, 0);
   }
+}
+
+/* ------------------------------ Focus ---------------------------------- */
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------------------------- Gridlines -------------------------------- */
+/* Schematic surface: hairlines on the container edges and thirds. */
+
+.gridlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+}
+.gridlines__inner {
+  position: relative;
+  width: 100%;
+  max-width: var(--maxw);
+  height: 100%;
+}
+.gridlines__inner span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--grid-line);
+  transform-origin: top;
+}
+.gridlines__inner span:nth-child(1) { left: 0; }
+.gridlines__inner span:nth-child(2) { left: 33.333%; }
+.gridlines__inner span:nth-child(3) { left: 66.666%; }
+.gridlines__inner span:nth-child(4) { right: 0; }
+
+main,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ------------------------- Border illumination ------------------------- */
+/* A cursor-tracked radial gradient painted on the 1px border only.
+   site.js writes --mx / --my on pointermove. */
+
+.glow {
+  position: relative;
+}
+.glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  pointer-events: none;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(89, 243, 176, 0.55),
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity var(--dur-ui) var(--ease-ui);
+}
+.glow:hover::before,
+.glow:focus-visible::before {
+  opacity: 1;
+}
+
+/* --------------------------- State-graph HUD --------------------------- */
+
+.hud {
+  position: fixed;
+  z-index: 40;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--hud-w);
+  view-transition-name: hud;
+}
+.hud svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.hud__edge {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1;
+  transition: stroke var(--dur-ui) var(--ease-ui);
+}
+.hud__edge.is-hot {
+  stroke: rgba(89, 243, 176, 0.55);
+}
+.hud__p {
+  font: 400 9.5px var(--font-mono);
+  fill: #777;
+  opacity: 0;
+  transition: opacity var(--dur-ui) var(--ease-ui);
+}
+.hud__p.is-hot,
+.hud:hover .hud__p {
+  opacity: 1;
+}
+.hud__node {
+  cursor: pointer;
+  outline: none;
+}
+.hud__dot {
+  fill: var(--bg);
+  stroke: #666;
+  stroke-width: 1;
+  transition: fill var(--dur-ui) var(--ease-ui), stroke var(--dur-ui) var(--ease-ui);
+}
+.hud__node text {
+  font: 400 11px var(--font-mono);
+  fill: var(--muted);
+  transition: fill var(--dur-ui) var(--ease-ui);
+}
+.hud__node:hover .hud__dot,
+.hud__node:focus-visible .hud__dot {
+  stroke: var(--accent);
+}
+.hud__node:hover text,
+.hud__node:focus-visible text {
+  fill: var(--text);
+}
+.hud__node:focus-visible .hud__ring {
+  stroke: var(--accent);
+  opacity: 1;
+}
+.hud__ring {
+  fill: none;
+  stroke: transparent;
+  opacity: 0;
+}
+.hud__sub {
+  fill: #777;
+}
+.hud__node.is-current .hud__dot {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.hud__node.is-current text {
+  fill: var(--accent);
+}
+.hud__pulse {
+  fill: var(--accent);
+  opacity: 0;
+}
+.hud__title {
+  font: 400 10.5px var(--font-mono);
+  fill: #777;
+}
+
+/* Launch choreography (home, first visit): nodes snap, then edges draw. */
+html.boot .hud__node {
+  opacity: 0;
+  animation: hud-snap 260ms var(--ease) forwards;
+  animation-delay: calc(300ms + var(--i, 0) * 70ms);
+}
+html.boot .hud__edge {
+  stroke-dasharray: var(--len, 200);
+  stroke-dashoffset: var(--len, 200);
+  animation: hud-draw 420ms var(--ease) forwards;
+  animation-delay: calc(600ms + var(--i, 0) * 60ms);
+}
+@keyframes hud-snap {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hud-draw {
+  to { stroke-dashoffset: 0; }
+}
+.hud__node {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Below the wide breakpoint the HUD keeps nodes only; labels show on hover. */
+@media (max-width: 1559px) {
+  :root { --hud-w: 44px; }
+  .hud__node text,
+  .hud__p,
+  .hud__title { display: none; }
+}
+
+/* Mobile: the HUD becomes a thin progress chain under the nav. */
+@media (max-width: 820px) {
+  .hud {
+    top: var(--nav-h);
+    right: 0;
+    left: 0;
+    width: auto;
+    transform: none;
+    height: 22px;
+    background: rgba(5, 5, 5, 0.86);
+    border-bottom: 1px solid var(--border);
+  }
+  .hud svg {
+    height: 22px;
+    width: 100%;
+  }
+}
+/* Room for the mobile chain so it never covers content. */
+@media (max-width: 820px) {
+  body:has(> .hud:not(.hud--desktop)) .page {
+    padding-top: calc(var(--nav-h) + 22px);
+  }
+  .hud--desktop {
+    display: none;
+  }
+}
+
+/* -------------------------- Page transitions --------------------------- */
+
+@view-transition {
+  navigation: auto;
+}
+.nav {
+  view-transition-name: nav;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur-ui);
+  animation-timing-function: var(--ease-ui);
+}
+
+/* ------------------------------ Skip intro ----------------------------- */
+
+.skip-intro {
+  position: fixed;
+  z-index: 60;
+  right: 24px;
+  bottom: 24px;
+  font: 400 12.5px var(--font-mono);
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  padding: 10px 14px;
+  min-height: 44px;
+  cursor: pointer;
+  display: none;
+}
+html.boot .skip-intro {
+  display: inline-flex;
+  align-items: center;
+}
+.skip-intro:hover,
+.skip-intro:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* --------------------------- Reading progress -------------------------- */
+
+.read-chain {
+  position: fixed;
+  z-index: 49;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  height: 9px;
+  pointer-events: none;
+}
+.read-chain__track,
+.read-chain__fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4px;
+  height: 1px;
+  background: var(--border-strong);
+}
+.read-chain__fill {
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(var(--p, 0));
+}
+.read-chain__node {
+  position: absolute;
+  top: 1px;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid #4a4a4a;
+  pointer-events: auto;
+  transition: background var(--dur-ui) var(--ease-ui), border-color var(--dur-ui) var(--ease-ui);
+}
+.read-chain__node.is-passed {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+@media (hover: none) {
+  .read-chain__node { pointer-events: none; }
 }
 
 /* ---------------------------- Mobile / nav ----------------------------- */
@@ -408,5 +737,8 @@ a {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+  @view-transition {
+    navigation: none;
   }
 }

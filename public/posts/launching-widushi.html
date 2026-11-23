@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanjay Thakur | Founder's Motivation Notes for Widushi</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>if("noModule"in HTMLScriptElement.prototype){document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.remove("js")},4000)}</script>
+    <link rel="preload" href="../vendor/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../vendor/fonts/ibm-plex-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Crect x='11' y='7' width='10' height='18' fill='%2359f3b0'/%3E%3C/svg%3E">
+    <link rel="canonical" href="https://markovstate.sh/posts/launching-widushi.html">
+    <meta name="description" content="India stands at a defining moment with 800+ million Indians under 35. The real return on education lies not in degrees or GPAs, but in unlocking human potential. It&#x27;s time to reimagine education for the AI era.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="markovstate.sh">
+    <meta property="og:title" content="Founder&#x27;s Motivation Notes for Widushi">
+    <meta property="og:description" content="India stands at a defining moment with 800+ million Indians under 35. The real return on education lies not in degrees or GPAs, but in unlocking human potential. It&#x27;s time to reimagine education for the AI era.">
+    <meta property="og:url" content="https://markovstate.sh/posts/launching-widushi.html">
+    <meta name="twitter:card" content="summary">
     <link rel="stylesheet" href="../theme.css">
     <link rel="stylesheet" href="post.css">
     <style>
@@ -420,7 +429,7 @@
         }
     </style>
 </head>
-<body>
+<body data-page="post">
     <header class="nav" id="nav">
         <div class="nav__inner">
             <a class="brand" href="../index.html">markovstate.sh ~<span class="cursor"></span></a>
@@ -439,11 +448,14 @@
         </div>
     </header>
 
+    <nav class="hud hud--desktop" id="hud" aria-label="Site states"></nav>
+
     <main>
         <article class="blog-post">
             <div class="container">
                 <div class="main-content-wrapper">
                     <div class="article-content">
+                        <div class="post-header" aria-hidden="true"><canvas></canvas></div>
                         <h1>Founder's Motivation Notes for Widushi</h1>
                         <p class="post-date">July 3, 2025</p>
                         
@@ -488,7 +500,7 @@
                     <h2>WHERE THE SYSTEM FAILS</h2>
 
                     <div class="system-failures-image-container">
-                        <img src="../media/education_problems.png" alt="Where the Education System Fails" class="system-failures-image">
+                        <img src="../media/opt/education_problems.webp" width="1024" height="1024" loading="lazy" decoding="async" alt="Where the Education System Fails" class="system-failures-image">
                         <div class="image-caption">
                             <p>The three critical failures undermining our education system</p>
                         </div>
@@ -618,7 +630,7 @@
                         <div class="sidebar-post">
                             <div class="sidebar-post-category">AI</div>
                             <h4><a href="be-a-markov-state.html">Be a Markov State - A Lesson for Life</a></h4>
-                            <div class="sidebar-post-date">May 20, 2025</div>
+                            <div class="sidebar-post-date">May 7, 2025</div>
                             <div class="sidebar-post-excerpt">Life isn't a perfect Markov process, but as a mental model, it's empowering. It shifts our focus from helplessness to agency.</div>
                         </div>
                     </aside>
@@ -670,5 +682,7 @@
             });
         });
     </script>
+    <script src="../blogData.js"></script>
+    <script type="module" src="../js/motion/post.js"></script>
 </body>
 </html>

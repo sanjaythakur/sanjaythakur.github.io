@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanjay Thakur | The World's Most Advanced AI for Handwritten Answer Evaluation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>if("noModule"in HTMLScriptElement.prototype){document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.remove("js")},4000)}</script>
+    <link rel="preload" href="../vendor/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../vendor/fonts/ibm-plex-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Crect x='11' y='7' width='10' height='18' fill='%2359f3b0'/%3E%3C/svg%3E">
+    <link rel="canonical" href="https://markovstate.sh/posts/the-worlds-most-advanced-ai-for-handwritten-evaluation.html">
+    <meta name="description" content="Imagine an AI that reads any handwriting and understands complex diagrams, tables, and flowcharts, then provides expert-level evaluations instantly. At Widushi, we&#x27;ve turned this vision into reality with breakthrough technology that transforms assessment worldwide.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="markovstate.sh">
+    <meta property="og:title" content="The World&#x27;s Most Advanced AI for Handwritten Answer Evaluation">
+    <meta property="og:description" content="Imagine an AI that reads any handwriting and understands complex diagrams, tables, and flowcharts, then provides expert-level evaluations instantly. At Widushi, we&#x27;ve turned this vision into reality with breakthrough technology that transforms assessment worldwide.">
+    <meta property="og:url" content="https://markovstate.sh/posts/the-worlds-most-advanced-ai-for-handwritten-evaluation.html">
+    <meta name="twitter:card" content="summary">
     <link rel="stylesheet" href="../theme.css">
     <link rel="stylesheet" href="post.css">
     <style>
@@ -602,7 +611,7 @@
         }
     </style>
 </head>
-<body>
+<body data-page="post">
     <header class="nav" id="nav">
         <div class="nav__inner">
             <a class="brand" href="../index.html">markovstate.sh ~<span class="cursor"></span></a>
@@ -621,11 +630,14 @@
         </div>
     </header>
 
+    <nav class="hud hud--desktop" id="hud" aria-label="Site states"></nav>
+
     <main>
         <article class="blog-post">
             <div class="container">
                 <div class="main-content-wrapper">
                     <div class="article-content">
+                        <div class="post-header" aria-hidden="true"><canvas></canvas></div>
                         <h1>The World's Most Advanced AI for Handwritten Answer Evaluation</h1>
                         <p class="post-date">July 26, 2025</p>
                         
@@ -650,8 +662,8 @@
                             </div>
                             
                             <div class="demo-video-container">
-                                <video id="widushi-demo-video" class="demo-video" autoplay loop muted playsinline>
-                                    <source src="../media/widushi-handwritten-eval-ip.mp4" type="video/mp4">
+                                <video preload="none" data-autoplay id="widushi-demo-video" class="demo-video" loop muted playsinline data-poster="../media/opt/widushi-handwritten-eval-ip-poster.webp" width="720" height="1280">
+                                    <source src="../media/opt/widushi-handwritten-eval-ip.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                                 <div class="video-caption">
@@ -660,8 +672,8 @@
                                 </div>
                             </div>
                             <div id="fullscreen-overlay" class="fullscreen-overlay">
-                                <video id="fullscreen-video" class="demo-video fullscreen" autoplay loop muted playsinline>
-                                    <source src="../media/widushi-handwritten-eval-ip.mp4" type="video/mp4">
+                                <video preload="none" id="fullscreen-video" class="demo-video fullscreen" loop muted playsinline>
+                                    <source src="../media/opt/widushi-handwritten-eval-ip.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
@@ -848,8 +860,8 @@
                                 <h3>See Widushi AI in Action</h3>
                                 <div class="demo-videos-grid">
                                     <div class="demo-video-item">
-                                        <video class="demo-video-small" autoplay loop muted playsinline>
-                                            <source src="../media/actionable_feedback.mp4" type="video/mp4">
+                                        <video preload="none" data-autoplay class="demo-video-small" loop muted playsinline data-poster="../media/opt/actionable_feedback-poster.webp" width="720" height="1280">
+                                            <source src="../media/opt/actionable_feedback.mp4" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
                                         <div class="video-caption">
@@ -858,8 +870,8 @@
                                     </div>
                                     
                                     <div class="demo-video-item">
-                                        <video class="demo-video-small" autoplay loop muted playsinline>
-                                            <source src="../media/cohesive_across_pages.mp4" type="video/mp4">
+                                        <video preload="none" data-autoplay class="demo-video-small" loop muted playsinline data-poster="../media/opt/cohesive_across_pages-poster.webp" width="720" height="1280">
+                                            <source src="../media/opt/cohesive_across_pages.mp4" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
                                         <div class="video-caption">
@@ -868,8 +880,8 @@
                                     </div>
                                     
                                     <div class="demo-video-item">
-                                        <video class="demo-video-small" autoplay loop muted playsinline>
-                                            <source src="../media/ignores_non_relevant_background_printed_text.mp4" type="video/mp4">
+                                        <video preload="none" data-autoplay class="demo-video-small" loop muted playsinline data-poster="../media/opt/ignores_non_relevant_background_printed_text-poster.webp" width="720" height="1280">
+                                            <source src="../media/opt/ignores_non_relevant_background_printed_text.mp4" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
                                         <div class="video-caption">
@@ -878,8 +890,8 @@
                                     </div>
                                     
                                     <div class="demo-video-item">
-                                        <video class="demo-video-small" autoplay loop muted playsinline>
-                                            <source src="../media/multiple_languages.mp4" type="video/mp4">
+                                        <video preload="none" data-autoplay class="demo-video-small" loop muted playsinline data-poster="../media/opt/multiple_languages-poster.webp" width="720" height="1280">
+                                            <source src="../media/opt/multiple_languages.mp4" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
                                         <div class="video-caption">
@@ -888,8 +900,8 @@
                                     </div>
                                     
                                     <div class="demo-video-item">
-                                        <video class="demo-video-small" autoplay loop muted playsinline>
-                                            <source src="../media/understands_handdrawn_diagrams.mp4" type="video/mp4">
+                                        <video preload="none" data-autoplay class="demo-video-small" loop muted playsinline data-poster="../media/opt/understands_handdrawn_diagrams-poster.webp" width="720" height="1280">
+                                            <source src="../media/opt/understands_handdrawn_diagrams.mp4" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
                                         <div class="video-caption">
@@ -1135,5 +1147,7 @@
             });
         });
     </script>
+    <script src="../blogData.js"></script>
+    <script type="module" src="../js/motion/post.js"></script>
 </body>
 </html>
