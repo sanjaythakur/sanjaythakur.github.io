@@ -32,7 +32,8 @@ The section follows the same rules as the rest of the site:
 | `public/js/play/<slug>/sim.js` | The game's rules. No DOM, so it runs under Node. |
 | `public/js/play/<slug>/view.js` | Rendering, input and flow for one game. |
 | `public/js/play/markovle/draw.js` | Chain drawing, shared by the `markovle` view and the hub preview. |
-| `tools/play/*.test.mjs` | Headless tests. Never deployed. |
+| `public/js/play/how-many/`, `echo/`, `reflex/` | The quick games (see below). `echo` reuses `markovle/draw.js` for its shapes; `reflex` has no canvas. |
+| `tools/play/*.test.mjs` | Headless tests. Never deployed. `quick.test.mjs` covers the three quick games. |
 | `tools/play/drift-bots.mjs` | Autopilots and the reachability check used to tune and test `drift`. |
 | `tools/og/card.html`, `render.sh` | OG cards, including `play.png` and `play-<slug>.png`. |
 
@@ -70,6 +71,8 @@ Rule 4 in spec §6 applies to every `sim.js`: the same seed must give the same g
    - `slug`, `title`, `hook`, `rule`;
    - `type` (`daily` / `arcade` / `toy`), `time`, `daily`;
    - `hud` (a short node label);
+   - `casual: true` for a quick game (hub group "/ quick ones");
+   - for arcade games, `unit` (shown after the best run on the hub) and `lower: true` when a smaller score is better;
    - `cta` (`kind`, `copy`, `href`);
    - `post`.
 2. Write `public/js/play/<slug>/sim.js` and a test in `tools/play/<slug>.test.mjs`. The test should check that:
@@ -98,12 +101,18 @@ Every key is `markovstate:play:<slug>:<key>`, and the value is JSON.
 | `lost-without-gps` | `best` | the best mean error in metres |
 | `drift` | `runs` | the top 5 `[{ m, d: "YYYY-MM-DD" }]`, best first |
 | `drift` | `lastPlayed` | the puzzle number of the day of the last run, used by `surprise me` |
+| `how-many` | `results` | `{ [puzzle]: { g: [guesses], n: [truths], pct, label } }` |
+| `how-many` | `progress` | `{ puzzle, g, seen }` while in progress; `seen` is the cloud already flashed, so a reload skips straight to its guess |
+| `how-many` | `best` | the lowest mean % off |
+| `echo` | `runs` | the top 5 `[{ m: hops, d }]`, best first |
+| `reflex` | `runs` | the top 5 `[{ m: avg ms, d }]`, fastest first |
+| `echo`, `reflex` | `lastPlayed` | as for `drift` |
 
 A finished daily puzzle shows its result on reload instead of letting you play it again.
 
 ## Challenge links
 
-The format is `drift.html?c=<seed in base36>.<metres>`, for example `?c=1tbbci.7`.
+The format is `drift.html?c=<seed in base36>.<metres>`, for example `?c=1tbbci.7`. `echo.html` uses the same format with hops (the seed fixes the whole path), and `reflex.html` with the average in ms (lower wins).
 
 - `challenge.js` checks the format strictly: up to 7 base-36 characters, a dot, then up to 7 digits. Anything else is ignored, and the page falls back to a random course.
 - The score in the link is a claim, not a verified result. That is fine between friends, and it is why there is no public ranking.
@@ -122,7 +131,8 @@ Node 22 needs the file glob; it won't take a directory. The tests check:
 - `markovle`: 365 puzzles are valid, and the true chain is always at least 3× as likely as each decoy;
 - `lost-without-gps`: 365 puzzles are well formed, and the filter's error stays credible;
 - `drift`: recorded runs replay exactly, 200 courses are passable to 4 km, and compensating for drift beats ignoring it;
-- shared modules: daily rollover, streaks, challenge-link round trips, and storage fallbacks.
+- shared modules: daily rollover, streaks, challenge-link round trips, and storage fallbacks;
+- quick games: two years of `how-many` clouds are in range, grow every round and never overlap; `echo` paths never stay put and levels/scoring work; `reflex` replays false starts, too-fast and too-slow taps.
 
 To tune `drift`, run `node tools/play/drift-bots.mjs`. It prints the distances reached by four autopilots. The tuned values are in CONCEPT §3.3.
 
@@ -137,6 +147,18 @@ The page computes the `GOLDEN` values from the tests: puzzle #1 of each daily ga
 Results at launch (2026-11-24): identical in V8 (Node and Chrome), JavaScriptCore and Firefox 160.
 
 **Lighthouse mobile at launch** (local server; P / A11y / BP / SEO): Home 100/100/100/100, `be-a-markov-state` 99/98/100/100, hub and all three games 100/100/100/100, CLS 0 on every play page. Home and the post are unchanged from `docs/motion/README.md`.
+
+## The quick games
+
+Added after launch because the first three all need some technical interest. These three need none:
+
+| Game | Type | How it plays |
+|---|---|---|
+| `how-many` ("how many?") | daily | 5 clouds of dots (about 12–25 up to 195–320), each on screen for 1.6–2 s. Type a guess. Score: mean % off. 🟩 within 10 %, 🟨 within 25 %. Layouts: even scatter, clumps, mixed sizes; each appears at least once a day. |
+| `echo` | arcade | A dot hops between 4 shapes (A–D, the markovle colours and shapes, so colour is never the only cue). Repeat the path; one more hop per level; one wrong tap ends. Keys 1–4 or arrows. Challenge links replay the same path. |
+| `reflex` | arcade | 5 rounds: wait 1.1–4 s for green, tap. Under 90 ms or before green is a false start and the round replays. Score: average ms. |
+
+They follow the same rules (seeded sims, no network, reduced motion, sound off by default). Their primary CTA is sharing, since they demonstrate nothing technical. The hub shows them first, under "/ quick ones".
 
 ## Release checklist
 

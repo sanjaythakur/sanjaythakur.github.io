@@ -22,6 +22,8 @@
   import { hash } from "../../public/js/motion/tokens.js";
   import * as M from "../../public/js/play/markovle/sim.js";
   import * as G from "../../public/js/play/lost-without-gps/sim.js";
+  import * as HM from "../../public/js/play/how-many/sim.js";
+  import * as E from "../../public/js/play/echo/sim.js";
   import { run, skilled } from "./drift-bots.mjs";
 
   const g = G.create(1);
@@ -38,6 +40,8 @@
     ["drift golden run", JSON.stringify([r.m, r.s.tick, r.s.fixes]), "[1602,9349,11]"],
     ["markovle #1–60", yearM, 587965200],
     ["lost-without-gps #1–60", yearG, 1251925204],
+    ["how-many #1", hash(JSON.stringify(HM.create(1).rounds)), 4106084052],
+    ["echo seed 12345", hash(JSON.stringify(E.create(12345).path)), 736946042],
   ];
   document.getElementById("engine").textContent = navigator.userAgent;
   const ok = rows.every(([, got, want]) => got === want);

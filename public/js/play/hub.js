@@ -34,7 +34,7 @@ function paintStatus() {
     if (!el) continue;
     if (!g.daily) {
       const top = store(g.slug).get("runs", [])[0];
-      el.textContent = top ? `best ${top.m.toLocaleString("en-US")} m` : "no runs yet";
+      el.textContent = top ? `best ${top.m.toLocaleString("en-US")} ${g.unit || ""}` : "no runs yet";
       continue;
     }
     const res = store(g.slug).get("results", {})[today];
@@ -46,7 +46,7 @@ function paintStatus() {
 
 mountPlayHud("play");
 drawPreviews();
-new ResizeObserver(drawPreviews).observe(document.getElementById("cards"));
+document.querySelectorAll(".cards").forEach((el) => new ResizeObserver(drawPreviews).observe(el));
 paintStatus();
 setInterval(() => document.visibilityState === "visible" && paintStatus(), 1000);
 
