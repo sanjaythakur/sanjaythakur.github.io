@@ -727,6 +727,48 @@ html.boot .skip-intro {
   }
 }
 
+/* ------------------------------------------------------------ crosshair
+   Desktop, fine pointer only (SPEC §9). Shown only over interactive scenes
+   (the globe, the edge scene, the HUD); tracks the pointer 1:1, no trails.
+   Over a link or button the arms open and turn mint, the one affordance signal. */
+.xhair {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-micro) var(--ease-ui);
+  will-change: transform;
+}
+.xhair.is-on { opacity: 1; }
+.xhair span { position: absolute; left: 0; top: 0; }
+.xhair span::before,
+.xhair span::after {
+  content: "";
+  position: absolute;
+  background: rgba(242, 242, 242, 0.78);
+  transition: transform var(--dur-micro) var(--ease-ui), background-color var(--dur-micro) var(--ease-ui);
+}
+.xhair .h::before,
+.xhair .h::after { top: -0.5px; width: 7px; height: 1px; }
+.xhair .h::before { left: -11px; }
+.xhair .h::after { left: 4px; }
+.xhair .v::before,
+.xhair .v::after { left: -0.5px; width: 1px; height: 7px; }
+.xhair .v::before { top: -11px; }
+.xhair .v::after { top: 4px; }
+.xhair.is-link span::before,
+.xhair.is-link span::after { background: var(--accent); }
+.xhair.is-link .h::before { transform: translateX(-3px); }
+.xhair.is-link .h::after { transform: translateX(3px); }
+.xhair.is-link .v::before { transform: translateY(-3px); }
+.xhair.is-link .v::after { transform: translateY(3px); }
+.xh-region.xh-live,
+.xh-region.xh-live * { cursor: none !important; }
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;

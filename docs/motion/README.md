@@ -10,7 +10,7 @@ The site uses plain HTML, CSS and ES modules. There is no build step and nothing
 |---|---|
 | `public/theme.css` | Self-hosted fonts and motion tokens. Also: reveals, gridlines, border glow, the HUD, the boot sequence, view transitions, the reading chain and reduced-motion overrides. |
 | `public/js/motion/tokens.js` | The JS twin of the CSS tokens (durations, stagger, colours). Also maths helpers, the seeded RNG, `fitCanvas` and `loop()`, the render loop that sleeps when idle. |
-| `public/js/motion/site.js` | Loaded on every page. Runs the reveal observer and border glow, and mounts the page-level HUD. |
+| `public/js/motion/site.js` | Loaded on every page. Runs the reveal observer, border glow and the desktop crosshair (shown only over `XH_REGIONS`: the globe, the edge scene and the HUD), and mounts the page-level HUD. |
 | `public/js/motion/hud.js` | The state-graph HUD: an SVG of real `<a>` nodes that pulses between states. |
 | `public/js/motion/field.js` | The shared particle field on the home page. Particles morph between keyframes anchored to scroll positions. |
 | `public/js/motion/home.js` | Home page wiring. Holds the HUD states, the boot sequence and the list of field keyframes. |
