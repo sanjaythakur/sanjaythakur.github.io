@@ -48,7 +48,7 @@ export const GAMES = [
     rule: "hold to climb, release to sink. fly through beacons to fix your estimate.",
     type: "arcade",
     time: "30–90 s",
-    status: "soon",
+    status: "live",
     daily: false,
     hud: "drift",
     ownerBest: null, // set to the owner's best run (metres) to show it as a target

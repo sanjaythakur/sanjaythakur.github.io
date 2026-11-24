@@ -381,6 +381,46 @@ a.card:focus-visible {
   margin-bottom: 10px;
 }
 
+/* drift: run canvas, challenge banner, top 5 */
+.stage--run {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.stage--run canvas {
+  height: min(56dvh, 460px);
+}
+.stage--run:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+.stage__intro--soft {
+  background: rgba(5, 5, 5, 0.5);
+  pointer-events: none;
+}
+.banner {
+  margin: 0 0 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 14px;
+}
+.top5 {
+  margin: 0;
+  padding: 0 0 0 22px;
+  font-size: 13px;
+}
+.top5 li {
+  padding: 2px 0;
+}
+.top5 li span + span {
+  margin-left: 14px;
+}
+.top5 li.is-this {
+  color: var(--accent);
+}
+
 /* end screen (shared) */
 .end {
   margin: 24px 0 0;
@@ -516,6 +556,15 @@ a.card:focus-visible {
   }
   .stage canvas {
     height: min(34dvh, 300px);
+  }
+  /* drift: full width, enough look-ahead (180 units across, 100 tall). */
+  .stage--run {
+    margin-left: -22px;
+    margin-right: -22px;
+  }
+  .stage--run canvas {
+    height: auto;
+    aspect-ratio: 9 / 5;
   }
   /* The map keeps its 3:2 aspect and uses the full screen width. */
   .stage--map {

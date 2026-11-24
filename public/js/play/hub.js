@@ -75,9 +75,14 @@ function playedToday(g) {
 
 function paintStatus() {
   for (const g of GAMES) {
-    if (g.status !== "live" || !g.daily) continue;
+    if (g.status !== "live") continue;
     const el = document.querySelector(`[data-slug="${g.slug}"] [data-status]`);
     if (!el) continue;
+    if (!g.daily) {
+      const top = store(g.slug).get("runs", [])[0];
+      el.textContent = top ? `best ${top.m.toLocaleString("en-US")} m` : "no runs yet";
+      continue;
+    }
     const res = store(g.slug).get("results", {})[today];
     el.textContent = res
       ? `#${today} · ${res.label || ""} · next in ${countdown()}`

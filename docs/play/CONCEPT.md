@@ -118,6 +118,7 @@ The alternatives are `./play`, `Take a Break` and `Kill 2 Minutes`. `./play` is 
 | End | The run ends when the true position touches a wall. Score is distance in whole metres. |
 | Local scores | Personal best and top 5 with dates. A "the owner's best" line appears only if a value is set in the registry. |
 | Challenge link | `drift.html?c=<seed in base36>.<metres>`. Opening it shows the same corridor under the banner `>> beat 1,284 m`, then the result `you won by 212 m` or `short by 88 m`, then their own link. |
+| As built | Climb/sink at 50 units/s, easing in from 35% over the first 1.5 s. Drift pull 0.008 units/tick and a random walk, both × (1 + km/0.5); the ghost fades out at 16 units (1.6 m) of bias. Tuned with autopilots over 200 seeds: ignoring the ghost reaches a median of ~480 m, using it ~680 m, learning the drift rate and compensating ~1,800 m. A reachability check confirms courses are passable to 4 km. Touch is "hold anywhere to climb" rather than top/bottom halves, which is easier with one thumb. |
 
 ```
 ┌ drift ─────────────────────────────────────┐
