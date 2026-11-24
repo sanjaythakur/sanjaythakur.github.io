@@ -69,7 +69,7 @@ export function run(seed, bot, maxTicks = D.HZ * 400) {
   return { s, toggles, m: D.score(s) };
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (typeof process !== "undefined" && import.meta.url === `file://${process.argv[1]}`) {
   const N = 200;
   for (const [name, make] of Object.entries({ oracle: () => oracle, naive: () => naive, attentive: () => attentive, skilled })) {
     const ms = [];

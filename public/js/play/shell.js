@@ -51,8 +51,10 @@ export function mountGamePage(slug) {
   mountPlayHud(slug);
   const t = document.getElementById("soundToggle");
   if (t) bindToggle(t);
+  // "Play another" is static HTML in each page (no layout shift, works
+  // without JS); renderPlayAnother() rebuilds it if the registry changes.
   const other = document.getElementById("playAnother");
-  if (other) renderPlayAnother(other, slug);
+  if (other && !other.childElementCount) renderPlayAnother(other, slug);
 }
 
 export function renderPlayAnother(el, slug) {

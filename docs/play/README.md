@@ -62,7 +62,7 @@ Rule 4 in spec §6 applies to every `sim.js`: the same seed must give the same g
 | Daily | `hash("markovstate:<slug>:<puzzleNumber>")` via `dailySeed()`. Puzzle #1 is `LAUNCH_UTC`; the number goes up at 00:00 UTC. |
 | Arcade | A random `uint32` from `crypto.getRandomValues`, or the seed in `?c=` when the page is opened from a challenge link. |
 
-**Before launch, set `LAUNCH_UTC` in `public/js/play/daily.js` to the launch date.** After launch, never change it: that would renumber every puzzle and break every streak.
+`LAUNCH_UTC` in `public/js/play/daily.js` is the launch date, 2026-11-24. Never change it: that would renumber every puzzle and break every streak.
 
 ## Adding a game
 
@@ -128,27 +128,24 @@ To tune `drift`, run `node tools/play/drift-bots.mjs`. It prints the distances r
 
 **Checking another browser (Firefox and Safari).** The Node tests run on V8, the same engine as Chrome. To confirm another engine builds the same puzzles:
 
-1. Serve `public/`.
-2. Open `/play/` in the browser.
-3. Paste this into its console:
+1. Serve the repo root: `python3 -m http.server -d .`
+2. Open `/tools/play/fingerprint.html` in the browser.
+3. Check that every row says PASS and that the tab title reads `ALL PASS`.
 
-```js
-const [T, M, G] = await Promise.all([import("/js/motion/tokens.js"), import("/js/play/markovle/sim.js"), import("/js/play/lost-without-gps/sim.js")]);
-const g = G.create(1);
-[T.hash(JSON.stringify(M.create(1).rounds)),
- T.hash(JSON.stringify({ a: g.anchors, t: g.truth, u: g.turns, e: g.filter.est, c: g.filter.clouds.map((c) => [Array.from(c.x), Array.from(c.w)]) }))]
-```
+The page computes the `GOLDEN` values from the tests: puzzle #1 of each daily game, a 60-day hash of each, and the `drift` golden run. To check Safari's engine without the browser, run the same modules under JavaScriptCore (`/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc -m`).
 
-The result must be `[3529827932, 3059672235]`, the `GOLDEN` values in the tests. For `drift`, open the same `?c=` link in two browsers and check that the course matches.
+Results at launch (2026-11-24): identical in V8 (Node and Chrome), JavaScriptCore and Firefox 160.
+
+**Lighthouse mobile at launch** (local server; P / A11y / BP / SEO): Home 100/100/100/100, `be-a-markov-state` 99/98/100/100, hub and all three games 100/100/100/100, CLS 0 on every play page. Home and the post are unchanged from `docs/motion/README.md`.
 
 ## Release checklist
 
-- [ ] `LAUNCH_UTC` set to the launch date.
-- [ ] `node --test tools/play/*.test.mjs` passes.
-- [ ] Firefox and Safari return the fingerprints above.
-- [ ] Play each game on a real iPhone and Android phone, held upright: touch, hold-to-fly, share sheet.
-- [ ] Lighthouse mobile on Home, one post, the hub and each game. Target: performance ≥ 95, CLS 0, no regression from the numbers in `docs/motion/README.md`.
-- [ ] `sh tools/og/render.sh play` re-run if a title, hook or preview changed.
+- [x] `LAUNCH_UTC` set to the launch date (2026-11-24).
+- [x] `node --test tools/play/*.test.mjs` passes.
+- [x] Firefox and Safari's engine return the fingerprints (`tools/play/fingerprint.html`).
+- [ ] Play each game on a real iPhone and Android phone, held upright: touch, hold-to-fly, share sheet. **Not yet done.**
+- [x] Lighthouse mobile on Home, one post, the hub and each game (numbers above).
+- [x] `sh tools/og/render.sh play` run for launch. Re-run it if a title, hook or preview changes.
 
 ## Content the backlog games need from the owner
 

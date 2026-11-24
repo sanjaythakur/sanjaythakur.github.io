@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+  Cross-browser determinism check for the games. Build-time only; never served.
+  Serve the repo root (python3 -m http.server -d .) and open
+  /tools/play/fingerprint.html in each browser. Every row must say PASS.
+  The expected values are the GOLDEN values in tools/play/*.test.mjs.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>play fingerprints</title>
+<style>
+  body { background: #050505; color: #f2f2f2; font: 22px/1.6 ui-monospace, monospace; padding: 40px; }
+  .pass { color: #59f3b0; } .fail { color: #ff8a7a; }
+  #engine { color: #888; font-size: 16px; }
+</style>
+</head>
+<body>
+<p id="engine"></p>
+<div id="out">computing…</div>
+<script type="module">
+  import { hash } from "../../public/js/motion/tokens.js";
+  import * as M from "../../public/js/play/markovle/sim.js";
+  import * as G from "../../public/js/play/lost-without-gps/sim.js";
+  import { run, skilled } from "./drift-bots.mjs";
+
+  const g = G.create(1);
+  let yearM = 0, yearG = 0;
+  for (let p = 1; p <= 60; p++) {
+    yearM = hash(yearM + JSON.stringify(M.create(p).rounds));
+    const q = G.create(p);
+    yearG = hash(yearG + JSON.stringify([q.truth, q.filter.est]));
+  }
+  const r = run(123456789, skilled());
+  const rows = [
+    ["markovle #1", hash(JSON.stringify(M.create(1).rounds)), 3529827932],
+    ["lost-without-gps #1", hash(JSON.stringify({ a: g.anchors, t: g.truth, u: g.turns, e: g.filter.est, c: g.filter.clouds.map((c) => [Array.from(c.x), Array.from(c.w)]) })), 3059672235],
+    ["drift golden run", JSON.stringify([r.m, r.s.tick, r.s.fixes]), "[1602,9349,11]"],
+    ["markovle #1–60", yearM, 587965200],
+    ["lost-without-gps #1–60", yearG, 1251925204],
+  ];
+  document.getElementById("engine").textContent = navigator.userAgent;
+  const ok = rows.every(([, got, want]) => got === want);
+  document.getElementById("out").innerHTML =
+    rows.map(([name, got, want]) => `<div class="${got === want ? "pass" : "fail"}">${got === want ? "PASS" : "FAIL"} ${name}: ${got}${got === want ? "" : " (want " + want + ")"}</div>`).join("") +
+    `<p class="${ok ? "pass" : "fail"}">${ok ? "ALL PASS" : "MISMATCH"}</p>`;
+  document.title = ok ? "ALL PASS" : "MISMATCH";
+</script>
+</body>
+</html>

@@ -81,7 +81,9 @@ kbd {
   border: 1px solid var(--border);
   background: var(--bg-soft);
   color: var(--text);
-  transition: border-color 0.25s var(--ease);
+  /* Keep the shared .reveal fade alongside the hover border. */
+  transition: border-color 0.25s var(--ease), opacity var(--dur-reveal) var(--ease),
+    transform var(--dur-reveal) var(--ease);
 }
 a.card:hover,
 a.card:focus-visible {
