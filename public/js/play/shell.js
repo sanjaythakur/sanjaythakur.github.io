@@ -105,6 +105,16 @@ export function renderEnd(el, o) {
   return { primary, say };
 }
 
+// When a round starts, make sure the whole play area is on screen (short
+// landscape phones put it below the fold). No-op when it already fits.
+export function bringIntoView(el) {
+  const r = el.getBoundingClientRect();
+  const navH = 64;
+  if (r.top >= navH && r.bottom <= innerHeight) return;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollBy({ top: r.top - navH - Math.max(0, (innerHeight - navH - r.height) / 2), behavior: reduce ? "auto" : "smooth" });
+}
+
 // Daily games: "next puzzle in 07:12:09", switching to a link once it is out.
 let clockTimer = 0;
 export function dailyClock(today, href) {

@@ -8,7 +8,7 @@ import { tone } from "../audio.js";
 import { bySlug } from "../games.js";
 import { encode, fromLocation } from "../challenge.js";
 import { share, shareLabel } from "../share.js";
-import { h, mountGamePage, renderEnd, announce, followItem, anotherItem } from "../shell.js";
+import { h, mountGamePage, renderEnd, announce, followItem, anotherItem, bringIntoView } from "../shell.js";
 
 const game = bySlug(D.SLUG);
 const db = store(D.SLUG);
@@ -249,6 +249,7 @@ function begin() {
   if (phase === "ready") {
     phase = "flying";
     overlay.hidden = true;
+    bringIntoView(stage);
     lastNow = 0;
     acc = 0;
     tone("start");

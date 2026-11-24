@@ -6,7 +6,7 @@ import { puzzleNumber, streak } from "../daily.js";
 import { store } from "../storage.js";
 import { tone } from "../audio.js";
 import { bySlug } from "../games.js";
-import { h, mountGamePage, renderEnd, announce, shareItem, followItem, anotherItem, dailyClock, dailyHistory } from "../shell.js";
+import { h, mountGamePage, renderEnd, announce, shareItem, followItem, anotherItem, dailyClock, dailyHistory, bringIntoView } from "../shell.js";
 
 const game = bySlug(G.SLUG);
 const db = store(G.SLUG);
@@ -30,11 +30,14 @@ const results = () => db.get("results", {});
 function saveResult() {
   const err = G.score(state), filt = G.filterScore(state), beat = G.beats(state);
   const r = results();
-  r[today] = { err, filt, beat, g: state.guesses.map(([x, y]) => [Math.round(x * 100) / 100, Math.round(y * 100) / 100]), label: `${err.toFixed(1)} m` };
+  const res = { err, filt, beat, g: state.guesses.map(([x, y]) => [Math.round(x * 100) / 100, Math.round(y * 100) / 100]), label: `${err.toFixed(1)} m` };
+  r[today] = res;
   db.set("results", r);
   db.set("progress", null);
   const best = db.get("best", null);
   if (best === null || err < best) db.set("best", err);
+  // Returned, not re-read: storage may be unavailable.
+  return res;
 }
 
 // ---------- geometry ----------
@@ -308,6 +311,7 @@ function start() {
   phase = "guess";
   intro.hidden = true;
   lock.hidden = false;
+  bringIntoView(stage);
   tone("start");
   beginTurn();
 }
@@ -335,9 +339,9 @@ function confirm() {
 
 function finish() {
   phase = "end";
-  saveResult();
+  const res = saveResult();
   tone("finish");
-  showEnd(results()[today]);
+  showEnd(res);
 }
 
 function showEnd(res) {

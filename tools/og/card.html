@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <!--
-  Open Graph card for one post (SPEC §8.3). Build-time only; never served.
-  Rendered at 1200×630 by tools/og/render.sh. Usage: card.html?slug=<post-slug>
-  The art is the post's own generative header (same seed, same family), settled at t = 1.
+  Open Graph card for one post (SPEC §8.3) or one /play/ page. Build-time only; never served.
+  Rendered at 1200×630 by tools/og/render.sh.
+  Usage: card.html?slug=<post-slug>   (art: the post's own generative header, settled at t = 1)
+         card.html?page=play|<game-slug>   (art: the game's hub preview, from js/play/previews.js)
 -->
 <html lang="en">
 <head>
@@ -42,7 +43,49 @@
   <script src="../../public/blogData.js"></script>
   <script type="module">
     import { drawHeader, slugOf } from "../../public/js/motion/post-header.js";
-    const slug = new URLSearchParams(location.search).get("slug");
+    import { PREVIEW } from "../../public/js/play/previews.js";
+    import { GAMES, bySlug } from "../../public/js/play/games.js";
+    const q = new URLSearchParams(location.search);
+    const page = q.get("page");
+    if (page) {
+      // /play/ hub (three panels) or one game (its preview at 2×).
+      const game = page === "play" ? null : bySlug(page);
+      if (page !== "play" && !game) throw new Error("unknown page " + page);
+      document.getElementById("title").textContent = game ? game.title : "i'm bored";
+      document.getElementById("meta").textContent = game
+        ? `${game.hook.toLowerCase()}  ·  ${game.type}`
+        : "small games about markov chains, gps-denied navigation and drift";
+      await document.fonts.ready;
+      const c = document.getElementById("art");
+      const w = 1056, h = 250;
+      c.width = w; c.height = h;
+      const ctx = c.getContext("2d");
+      if (game) {
+        // Previews are designed for a ~16:10 card; only drift's corridor
+        // reads better across the full strip.
+        const bw = game.slug === "drift" ? w / 2 : (h / 2) * 1.9;
+        ctx.translate((w - bw * 2) / 2, 0);
+        ctx.scale(2, 2);
+        PREVIEW[game.slug](ctx, bw, h / 2);
+      } else {
+        GAMES.forEach((g, i) => {
+          ctx.save();
+          ctx.translate(i * (w / 3), 0);
+          ctx.strokeStyle = "#1a1a1a";
+          ctx.strokeRect(8.5, 0.5, w / 3 - 17, h - 1);
+          ctx.beginPath();
+          ctx.rect(8, 0, w / 3 - 16, h);
+          ctx.clip();
+          ctx.translate(8, 0);
+          ctx.scale(1.4, 1.4);
+          PREVIEW[g.slug](ctx, (w / 3 - 16) / 1.4, h / 1.4);
+          ctx.restore();
+        });
+      }
+      document.body.dataset.ready = "1";
+      throw "done"; // stop: the post branch below does not apply
+    }
+    const slug = q.get("slug");
     const post = blogPosts.find((p) => slugOf(p.file) === slug);
     if (!post) throw new Error("unknown slug " + slug);
     document.getElementById("title").textContent = post.title;

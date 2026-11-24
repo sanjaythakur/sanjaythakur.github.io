@@ -4,6 +4,8 @@ This is how the motion system on markovstate.sh works and how to change it. The 
 
 The site uses plain HTML, CSS and ES modules. There is no build step and nothing loads from a CDN at runtime. Fonts are in `public/vendor/fonts/` and there is no third-party JS.
 
+The games section (`/play/`, nav item "I'm Bored") has its own notes: [`docs/play/README.md`](../play/README.md). It reuses `tokens.js`, `hud.js` and `site.js`. The only change it makes to the motion system is a `play` node in `pageStates()`.
+
 ## File map
 
 | File | What it does |

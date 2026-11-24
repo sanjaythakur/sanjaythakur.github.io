@@ -7,7 +7,7 @@ import { puzzleNumber, streak } from "../daily.js";
 import { store } from "../storage.js";
 import { tone } from "../audio.js";
 import { bySlug } from "../games.js";
-import { h, mountGamePage, renderEnd, announce, shareItem, followItem, anotherItem, dailyClock, dailyHistory } from "../shell.js";
+import { h, mountGamePage, renderEnd, announce, shareItem, followItem, anotherItem, dailyClock, dailyHistory, bringIntoView } from "../shell.js";
 
 const game = bySlug(S.SLUG);
 const db = store(S.SLUG);
@@ -35,12 +35,15 @@ function saveProgress() {
 }
 function saveResult() {
   const r = results();
-  r[today] = { m: S.marks(state).map(Number), ms: Math.round(elapsed), label: `${S.score(state)}/${S.ROUNDS}` };
+  const res = { m: S.marks(state).map(Number), ms: Math.round(elapsed), label: `${S.score(state)}/${S.ROUNDS}` };
+  r[today] = res;
   db.set("results", r);
   db.set("progress", null);
   const best = db.get("best", null);
   const s = S.score(state);
   if (!best || s > best.s || (s === best.s && elapsed < best.ms)) db.set("best", { s, ms: Math.round(elapsed) });
+  // Returned, not re-read: storage may be unavailable.
+  return res;
 }
 
 // ---------- layout ----------
@@ -214,6 +217,7 @@ function start() {
   if (phase !== "intro") return;
   intro.hidden = true;
   stage.classList.add("is-live");
+  bringIntoView(document.querySelector(".board"));
   startedAt = performance.now();
   tone("start");
   beginRound();
@@ -262,9 +266,9 @@ function finish() {
   if (startedAt) elapsed += performance.now() - startedAt;
   startedAt = 0;
   phase = "end";
-  saveResult();
+  const res = saveResult();
   tone("finish");
-  showEnd(results()[today]);
+  showEnd(res);
 }
 
 const fmtTime = (ms) => {

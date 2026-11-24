@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Awaiting owner approval. Nothing past this document is built. |
+| **Status** | Approved 2026-11-24 and built on `feat/play`. Maintainer notes: [`README.md`](README.md). |
 | **Branch** | `feat/play` |
 | **Spec** | [`specifications/games.md`](../../specifications/games.md) |
 | **Written** | 2026-11-24 |
