@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+  Open Graph card for one post (SPEC §8.3). Build-time only; never served.
+  Rendered at 1200×630 by tools/og/render.sh. Usage: card.html?slug=<post-slug>
+  The art is the post's own generative header (same seed, same family), settled at t = 1.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @font-face { font-family: "IBM Plex Mono"; font-weight: 400; src: url("../../public/vendor/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "IBM Plex Mono"; font-weight: 600; src: url("../../public/vendor/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: #050505; }
+  body {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; color: #f2f2f2;
+    padding: 56px 72px; display: flex; flex-direction: column;
+    /* Hairline schematic grid, as on the site */
+    background-image:
+      linear-gradient(rgba(242,242,242,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(242,242,242,.045) 1px, transparent 1px);
+    background-size: 75px 75px; background-position: -1px -1px;
+  }
+  .frame { position: absolute; inset: 24px; border: 1px solid #262626; pointer-events: none; }
+  .top { display: flex; justify-content: space-between; font-size: 20px; color: #888; }
+  .brand { color: #f2f2f2; }
+  .cur { display: inline-block; width: .6em; height: 1em; background: #59f3b0; vertical-align: -.15em; margin-left: .2em; }
+  canvas { width: 1056px; height: 250px; margin: 28px 0 24px; display: block; }
+  h1 { font-weight: 600; font-size: 54px; line-height: 1.12; letter-spacing: -.01em; max-width: 1000px; }
+  h1.long { font-size: 46px; }
+  .meta { margin-top: auto; font-size: 20px; color: #888; }
+  .meta b { color: #59f3b0; font-weight: 400; }
+</style>
+</head>
+<body>
+  <div class="frame"></div>
+  <div class="top"><span class="brand">markovstate.sh ~<span class="cur"></span></span><span id="who">sanjay thakur</span></div>
+  <canvas id="art"></canvas>
+  <h1 id="title"></h1>
+  <div class="meta"><b>&gt;</b> <span id="meta"></span></div>
+
+  <script src="../../public/blogData.js"></script>
+  <script type="module">
+    import { drawHeader, slugOf } from "../../public/js/motion/post-header.js";
+    const slug = new URLSearchParams(location.search).get("slug");
+    const post = blogPosts.find((p) => slugOf(p.file) === slug);
+    if (!post) throw new Error("unknown slug " + slug);
+    document.getElementById("title").textContent = post.title;
+    if (post.title.length > 52) document.getElementById("title").classList.add("long");
+    document.getElementById("meta").textContent = post.date.toLowerCase() + "  ·  " + post.category.toLowerCase();
+    await document.fonts.ready;
+    const c = document.getElementById("art");
+    const w = 1056, h = 250, r = 1;
+    c.width = w * r; c.height = h * r;
+    const ctx = c.getContext("2d");
+    ctx.scale(r, r);
+    drawHeader(ctx, w, h, { slug, category: post.category, t: 1, labels: true });
+    document.body.dataset.ready = "1";
+  </script>
+</body>
+</html>

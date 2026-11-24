@@ -18,6 +18,7 @@ The site uses plain HTML, CSS and ES modules. There is no build step and nothing
 | `public/js/motion/post-header.js` | Generates the header for each post. The same image is a still on the blog index. |
 | `public/js/motion/post.js` | Post pages: the header, the reading-progress chain, lazy video posters and visibility-gated autoplay. |
 | `public/js/motion/blog.js` | Blog index: card previews and the first-load stagger. |
+| `tools/og/` | Build-time only. `card.html` and `render.sh` produce the per-post OG images in `public/media/og/`. |
 | `public/media/opt/` | WebP and MP4 derivatives plus video posters. The originals in `public/media/` are not changed. |
 
 ## Adding a post
@@ -32,6 +33,7 @@ The site uses plain HTML, CSS and ES modules. There is no build step and nothing
 
    Renaming the file changes the header.
 4. For media, put an optimised copy in `media/opt/` and keep the original. For autoplay clips, use `preload="none" data-autoplay data-poster="…"` and do not use `autoplay`; the script plays a clip only while it is on screen.
+5. **Open Graph image.** Copy the `og:image`, `og:image:width`, `og:image:height` and `twitter:card` tags from an existing post and change the slug. Then run `sh tools/og/render.sh` from the repo root and commit the new `public/media/og/<slug>.png`. The script serves the repo locally and screenshots `tools/og/card.html` in headless Chrome at 1200×630, once per post in `blogData.js`. The card's art comes from the same `drawHeader` call as the post header, so the image always matches it. `tools/` is never deployed.
 
 ## Tuning motion
 
