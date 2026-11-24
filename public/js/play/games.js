@@ -31,7 +31,7 @@ export const GAMES = [
     rule: "tap where you think the vehicle is. 8 turns. lower error wins.",
     type: "daily",
     time: "~120 s",
-    status: "soon",
+    status: "live",
     daily: true,
     hud: "lost",
     cta: {

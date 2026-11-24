@@ -9,6 +9,7 @@ import { mountHud } from "../motion/hud.js";
 import { bindToggle } from "./audio.js";
 import { GAMES, bySlug, X_URL } from "./games.js";
 import { share, shareLabel } from "./share.js";
+import { puzzleNumber, countdown } from "./daily.js";
 
 // Tiny DOM builder: h("a", {href, class}, "text", child, ...)
 export function h(tag, attrs = {}, ...kids) {
@@ -102,6 +103,32 @@ export function renderEnd(el, o) {
   el.replaceChildren(...kids.filter(Boolean));
   el.hidden = false;
   return { primary, say };
+}
+
+// Daily games: "next puzzle in 07:12:09", switching to a link once it is out.
+let clockTimer = 0;
+export function dailyClock(today, href) {
+  const el = h("p", { class: "end__meta" });
+  const tick = () => {
+    if (puzzleNumber() !== today) {
+      el.replaceChildren(h("a", { href }, "a new puzzle is out →"));
+      clearInterval(clockTimer);
+    } else el.textContent = `next puzzle in ${countdown()} · resets 00:00 UTC`;
+  };
+  tick();
+  clearInterval(clockTimer);
+  clockTimer = setInterval(() => document.visibilityState === "visible" && tick(), 1000);
+  return el;
+}
+
+// Daily games: the last 14 puzzles as squares. grade(result) → 0..2 or -1.
+export function dailyHistory(results, today, grade, title) {
+  const cells = [];
+  for (let n = Math.max(1, today - 13); n <= today; n++) {
+    const g = results[n] ? grade(results[n]) : -1;
+    cells.push(h("span", { class: "cal__d" + ["", " is-low", " is-ok", " is-good"][g + 1], title: `#${n}: ${results[n] ? title(results[n]) : "not played"}` }));
+  }
+  return h("div", { class: "cal", "aria-label": "last 14 puzzles" }, cells);
 }
 
 // Secondary-row helpers shared by every game.

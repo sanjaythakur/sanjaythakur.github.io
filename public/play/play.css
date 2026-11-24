@@ -331,6 +331,56 @@ a.card:focus-visible {
   font-size: 13.5px;
 }
 
+/* lost-without-gps: map, readout, legend, explainer */
+.stage--map canvas {
+  height: min(52dvh, 520px);
+  cursor: crosshair;
+}
+.map-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin: 12px 0 0;
+  min-height: 44px;
+}
+.map-readout,
+.map-legend {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+.lg--truth {
+  color: var(--text);
+}
+.lg--filter,
+.lg--beat {
+  color: var(--accent);
+}
+.lg--you {
+  color: #ff8a7a;
+}
+.explainer {
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.explainer p {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  color: var(--muted);
+  max-width: 68ch;
+}
+.explainer .end__title {
+  margin-bottom: 10px;
+}
+
 /* end screen (shared) */
 .end {
   margin: 24px 0 0;
@@ -466,6 +516,15 @@ a.card:focus-visible {
   }
   .stage canvas {
     height: min(34dvh, 300px);
+  }
+  /* The map keeps its 3:2 aspect and uses the full screen width. */
+  .stage--map {
+    margin-left: -22px;
+    margin-right: -22px;
+  }
+  .stage--map canvas {
+    height: auto;
+    aspect-ratio: 3 / 2;
   }
   .end {
     padding: 18px;

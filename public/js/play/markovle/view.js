@@ -3,11 +3,11 @@
 import { fitCanvas, loop, reducedMotion, easeInOut, mint } from "../../motion/tokens.js";
 import * as S from "./sim.js";
 import { drawChain, drawNode, nodePos, bend, qAt, loopCentre, describe, COLORS } from "./draw.js";
-import { puzzleNumber, countdown, streak } from "../daily.js";
+import { puzzleNumber, streak } from "../daily.js";
 import { store } from "../storage.js";
 import { tone } from "../audio.js";
 import { bySlug } from "../games.js";
-import { h, mountGamePage, renderEnd, announce, shareItem, followItem, anotherItem } from "../shell.js";
+import { h, mountGamePage, renderEnd, announce, shareItem, followItem, anotherItem, dailyClock, dailyHistory } from "../shell.js";
 
 const game = bySlug(S.SLUG);
 const db = store(S.SLUG);
@@ -35,7 +35,7 @@ function saveProgress() {
 }
 function saveResult() {
   const r = results();
-  r[today] = { m: S.marks(state).map(Number), ms: Math.round(elapsed) };
+  r[today] = { m: S.marks(state).map(Number), ms: Math.round(elapsed), label: `${S.score(state)}/${S.ROUNDS}` };
   db.set("results", r);
   db.set("progress", null);
   const best = db.get("best", null);
@@ -274,40 +274,23 @@ const fmtTime = (ms) => {
 
 function history() {
   const r = results();
-  const cells = [];
-  for (let n = today - 13; n <= today; n++) {
-    if (n < 1) continue;
-    const res = r[n];
-    const c = res ? res.m.reduce((a, b) => a + b, 0) : -1;
-    const cell = h("span", { class: "cal__d" + (c < 0 ? "" : c >= 4 ? " is-good" : c >= 3 ? " is-ok" : " is-low"), title: `#${n}: ${c < 0 ? "not played" : c + "/5"}` });
-    cells.push(cell);
-  }
+  const sum = (res) => res.m.reduce((a, b) => a + b, 0);
   const best = db.get("best", null);
   return h(
     "div",
     { class: "end__extra" },
     h("p", { class: "end__meta" }, `streak ${streak(r, today)}`, best ? ` · best ${best.s}/5 in ${fmtTime(best.ms)}` : ""),
-    h("div", { class: "cal", "aria-label": "last 14 puzzles" }, cells),
+    dailyHistory(r, today, (res) => (sum(res) >= 4 ? 2 : sum(res) >= 3 ? 1 : 0), (res) => sum(res) + "/5"),
   );
 }
 
-let clockTimer = 0;
 function showEnd(res) {
   phase = "end";
   document.querySelector(".board").hidden = true;
   feedback.hidden = true;
   const m = res.m.map(Boolean);
   const c = m.filter(Boolean).length;
-  const clock = h("p", { class: "end__meta" });
-  const tickClock = () => {
-    if (puzzleNumber() !== today) {
-      clock.replaceChildren(h("a", { href: "markovle.html" }, "a new puzzle is out →"));
-      clearInterval(clockTimer);
-    } else clock.textContent = `next puzzle in ${countdown()} · resets 00:00 UTC`;
-  };
-  tickClock();
-  clearInterval(clockTimer);
-  clockTimer = setInterval(() => document.visibilityState === "visible" && tickClock(), 1000);
+  const clock = dailyClock(today, "markovle.html");
   renderEnd(endEl, {
     title: `markovle #${today}`,
     lines: [

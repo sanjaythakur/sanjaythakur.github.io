@@ -80,7 +80,7 @@ function paintStatus() {
     if (!el) continue;
     const res = store(g.slug).get("results", {})[today];
     el.textContent = res
-      ? `#${today} · ${res.m.reduce((a, b) => a + b, 0)}/${res.m.length} · next in ${countdown()}`
+      ? `#${today} · ${res.label || ""} · next in ${countdown()}`
       : `#${today} · not played yet`;
   }
 }
