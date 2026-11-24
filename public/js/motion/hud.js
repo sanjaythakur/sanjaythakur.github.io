@@ -199,6 +199,7 @@ export function pageStates(prefix = "") {
     { id: "home", label: "~/", sub: "home", href: prefix + "index.html" },
     { id: "work", label: "work", sub: "so far", href: prefix + "about.html" },
     { id: "blog", label: "writing", href: prefix + "blog.html" },
+    { id: "play", label: "i'm", sub: "bored", href: prefix + "play/" },
     { id: "about", label: "about", sub: "me", href: prefix + "about-more.html" },
   ];
 }
