@@ -7,6 +7,53 @@ export const X_URL = "https://x.com/WanabeMarkovian";
 export const GITHUB_URL = "https://github.com/sanjaythakur";
 
 export const GAMES = [
+  // Quick ones: nothing to know, just play.
+  {
+    slug: "how-many",
+    title: "how many?",
+    hook: "A cloud of dots flashes for a second. Guess how many.",
+    rule: "don't count, guess. 5 clouds a day, closest wins.",
+    type: "daily",
+    time: "~60 s",
+    status: "live",
+    daily: true,
+    casual: true,
+    hud: "count",
+    cta: { kind: "share", copy: ">> share today's result" },
+    post: { title: "the blog", href: "../blog.html" },
+  },
+  {
+    slug: "echo",
+    title: "echo",
+    hook: "Watch the dot hop. Tap the same path back.",
+    rule: "watch the dot hop between shapes, then tap the same path. one more hop each level.",
+    type: "arcade",
+    time: "30–120 s",
+    status: "live",
+    daily: false,
+    casual: true,
+    hud: "echo",
+    unit: "hops",
+    cta: { kind: "share", copy: ">> challenge a friend" },
+    post: { title: "Be a Markov State", href: "../posts/be-a-markov-state.html" },
+  },
+  {
+    slug: "reflex",
+    title: "reflex",
+    hook: "Wait for green. Tap. How fast are you, really?",
+    rule: "tap the moment the box turns green. 5 rounds, average wins.",
+    type: "arcade",
+    time: "~30 s",
+    status: "live",
+    daily: false,
+    casual: true,
+    hud: "tap",
+    unit: "ms",
+    lower: true,
+    cta: { kind: "share", copy: ">> challenge a friend" },
+    post: { title: "the blog", href: "../blog.html" },
+  },
+  // Nerdy ones: about the things I work on.
   {
     slug: "markovle",
     title: "markovle",
@@ -51,6 +98,7 @@ export const GAMES = [
     status: "live",
     daily: false,
     hud: "drift",
+    unit: "m",
     ownerBest: null, // set to the owner's best run (metres) to show it as a target
     cta: { kind: "share", copy: ">> challenge a friend" },
     post: { title: "the blog", href: "../blog.html" },

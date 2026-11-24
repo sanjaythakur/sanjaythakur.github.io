@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>I'm Bored — games on markovstate.sh</title>
-  <meta name="description" content="Small browser games about Markov chains, GPS-denied navigation and sensor drift. Play in under two minutes, no sign-up." />
+  <meta name="description" content="Small browser games for a bored minute: guess the dots, repeat the path, test your reflexes, plus a few nerdy ones. Under two minutes, no sign-up." />
   <script>if("noModule"in HTMLScriptElement.prototype){document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.remove("js")},4000)}</script>
   <link rel="preload" href="../vendor/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="../vendor/fonts/ibm-plex-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
@@ -13,7 +13,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="markovstate.sh" />
   <meta property="og:title" content="I'm Bored — games on markovstate.sh" />
-  <meta property="og:description" content="Small browser games about Markov chains, GPS-denied navigation and sensor drift." />
+  <meta property="og:description" content="Small browser games for a bored minute: memory, reflexes, a daily guess, and a few nerdy ones." />
   <meta property="og:url" content="https://markovstate.sh/play/" />
   <meta property="og:image" content="https://markovstate.sh/media/og/play.png" />
   <meta property="og:image:width" content="1200" />
@@ -51,12 +51,56 @@
       <header class="hub__head reveal">
         <p class="section-label">/ i'm bored</p>
         <h1 class="hub__title">pick a state<span class="accent">.</span> any state<span class="accent">.</span></h1>
-        <p class="hub__sub">&gt;&gt; small games about the things I work on. under two minutes each, nothing to sign up for.</p>
+        <p class="hub__sub">&gt;&gt; small games for a bored minute. under two minutes each, nothing to sign up for.</p>
         <noscript><p class="noscript">These games need JavaScript. They run entirely in your browser and send nothing anywhere.</p></noscript>
       </header>
 
       <!-- Static cards, so the list works without JS. hub.js adds previews and today's status. -->
+      <div class="hub__group reveal">
+        <p class="section-label">/ quick ones</p>
+        <p>nothing to know. just play.</p>
+      </div>
       <ul class="cards" id="cards">
+        <li id="how-many">
+          <a class="card glow reveal" href="how-many.html" data-slug="how-many">
+            <canvas class="card__art" aria-hidden="true"></canvas>
+            <span class="card__body">
+              <span class="card__name">how many?</span>
+              <span class="card__hook">A cloud of dots flashes for a second. Guess how many.</span>
+              <span class="card__tags"><span class="tag">daily</span><span>~60 s</span></span>
+              <span class="card__status" data-status></span>
+            </span>
+          </a>
+        </li>
+        <li id="echo">
+          <a class="card glow reveal" href="echo.html" data-slug="echo">
+            <canvas class="card__art" aria-hidden="true"></canvas>
+            <span class="card__body">
+              <span class="card__name">echo</span>
+              <span class="card__hook">Watch the dot hop. Tap the same path back.</span>
+              <span class="card__tags"><span class="tag">arcade</span><span>30–120 s</span></span>
+              <span class="card__status" data-status></span>
+            </span>
+          </a>
+        </li>
+        <li id="reflex">
+          <a class="card glow reveal" href="reflex.html" data-slug="reflex">
+            <canvas class="card__art" aria-hidden="true"></canvas>
+            <span class="card__body">
+              <span class="card__name">reflex</span>
+              <span class="card__hook">Wait for green. Tap. How fast are you, really?</span>
+              <span class="card__tags"><span class="tag">arcade</span><span>~30 s</span></span>
+              <span class="card__status" data-status></span>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="hub__group reveal">
+        <p class="section-label">/ nerdy ones</p>
+        <p>about the things I work on: markov chains, navigation without gps, sensor drift.</p>
+      </div>
+      <ul class="cards" id="cardsNerdy">
         <li id="markovle">
           <a class="card glow reveal" href="markovle.html" data-slug="markovle">
             <canvas class="card__art" aria-hidden="true"></canvas>

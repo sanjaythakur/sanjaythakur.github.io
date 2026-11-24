@@ -14,6 +14,7 @@ const TONES = {
   bad: [[220, 0, 0.16]],
   finish: [[523, 0, 0.1], [659, 0.1, 0.1], [784, 0.2, 0.18]],
   hop: [[0, 0, 0.05]], // frequency supplied by the caller
+  note: [[0, 0, 0.24]], // frequency supplied by the caller
 };
 
 export const soundOn = () => on;
